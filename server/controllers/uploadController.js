@@ -10,6 +10,9 @@ const uploadResume = async (req, res) => {
             });
 
         }
+        const user=await User.findById(req.user.id);
+        user.resume=req.file.path;
+        await user.save();
 
         res.status(200).json({
 

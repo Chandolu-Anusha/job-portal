@@ -20,6 +20,10 @@ const userSchema=new mongoose.Schema(
             type:String,
             enum:["student","recruiter"],
             default:"student"
+        },
+        resume:{
+            type:String,
+            default:""
         }
     },
     {

@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const jobRoutes=require("./routes/jobRoutes");
 const applicationRoutes=require("./routes/applicationRoutes");
 const {authMiddleware}=require("./middleware/authMiddleware");
+const uploadRoutes=require("./routes/uploadRoutes");
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/jobs",jobRoutes);
 
 app.use("/api/applications",applicationRoutes);
+
+app.use("/api/upload",uploadRoutes);
 
 const startServer = async () => {
     try {
