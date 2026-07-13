@@ -36,6 +36,7 @@ app.use("/api/saved",savedJobRoutes);
 
 app.use("/api/dashboard",dashboardRoutes);
 
+
 app.use(errorHandler);
 
 const startServer = async () => {

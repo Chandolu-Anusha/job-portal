@@ -1,5 +1,6 @@
 const Job=require("../models/Job");
 const Application=require("../models/Application");
+const { stack } = require("../routes/jobRoutes");
 
 const recruiterDashboard=async (req,res)=>{
     try{
@@ -25,7 +26,7 @@ const recruiterDashboard=async (req,res)=>{
         .populate("job","title company")
         .sort({createdAt:-1})
         .limit(5);
-        res.this.state(200).json({
+        res.status(200).json({
             success:true,
             totalJobs,
             totalApplications,
@@ -35,10 +36,39 @@ const recruiterDashboard=async (req,res)=>{
     }catch(error){
         res.status(500).json({
             success:false,
+            message:error.message,
+            stack:error.stack
+        });
+    }
+};
+const studentDashboard=async(req,res)=>{
+    try{
+        const totalAppliedJobs=await Application.countDocuments({
+            student:req.user.id
+        });
+        const totalSavedJobs=await SavedJob.countDocuments({
+            student:req.user.id
+        });
+        const recentApplications=await Application.find({
+            student:req.user.id
+        })
+        .populate("job","title comapany location salary")
+        .sort({createdAt:-1})
+        .limit(5);
+        res.status(200).json({
+            success:true,
+            totalAppliedJobs,
+            totalSavedJobs,
+            recentApplications
+        });
+    }catch(error){
+        res.status(500).json({
+            success:false,
             message:error.message
         });
     }
 };
 module.exports={
-    recruiterDashboard
+    recruiterDashboard,
+    studentDashboard
 };
