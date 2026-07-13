@@ -10,6 +10,7 @@ const applicationRoutes=require("./routes/applicationRoutes");
 const {authMiddleware}=require("./middleware/authMiddleware");
 const uploadRoutes=require("./routes/uploadRoutes");
 
+const savedJobRoutes=require("./routes/savedJobRoutes");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
     res.send("Welcome to Job Portal API");
 });
 app.get("/profile",authMiddleware);
+const errorHandler=require("./middleware/errorMiddleware");
 
 app.use("/api/auth", authRoutes);
 
@@ -28,6 +30,11 @@ app.use("/api/jobs",jobRoutes);
 app.use("/api/applications",applicationRoutes);
 
 app.use("/api/upload",uploadRoutes);
+
+
+app.use("/api/saved",savedJobRoutes);
+
+app.use(errorHandler);
 
 const startServer = async () => {
     try {

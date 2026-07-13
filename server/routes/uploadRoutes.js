@@ -13,7 +13,14 @@ const {
 } = require("../middleware/authMiddleware");
 
 router.post("/resume",authMiddleware,
-    upload.single("resume"),
+    (req,res,next)=>{
+        upload.single("resume")(req,res,(err)=>{
+            if(err){
+                return next(err);
+            }
+            next();
+        });
+    },
     uploadResume
 
 );

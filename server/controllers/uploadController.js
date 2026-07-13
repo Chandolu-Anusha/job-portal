@@ -1,3 +1,4 @@
+const User=require("../models/User");
 const uploadResume = async (req, res) => {
 
     try {
@@ -34,9 +35,10 @@ const uploadResume = async (req, res) => {
 
             success: false,
 
-            message: "Internal Server Error"
+            message: error.message
 
         });
+
 
     }
 
