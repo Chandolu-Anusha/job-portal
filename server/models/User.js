@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 const userSchema=new mongoose.Schema(
     {
-        name: {
+         name: {
             type:String,
             required:true,
             trim:true
@@ -16,6 +16,12 @@ const userSchema=new mongoose.Schema(
             type:String,
             required:true
         },
+         resetPasswordToken:{
+            type:String
+        },
+        resetPasswordExpire:{
+            type:Date
+        },
         role:{
             type:String,
             enum:["student","recruiter"],
@@ -24,8 +30,21 @@ const userSchema=new mongoose.Schema(
         resume:{
             type:String,
             default:""
-        }
-    },
+        },
+        phone:{
+            type:String
+        },
+        bio:{
+            type:String
+        },
+        skills:{
+            type:String
+        },
+        location:{
+            type:String
+        },
+       
+},
     {
         timestamps:true
     }
