@@ -256,5 +256,11 @@ const resetPassword = async (req, res) => {
 };
 
 module.exports={
-    register,login,getProfile,updateProfile,changePassword,forgotPassword
+    register,
+    login,
+    getProfile,
+    updateProfile,
+    changePassword,
+    forgotPassword,
+    resetPassword
 };
