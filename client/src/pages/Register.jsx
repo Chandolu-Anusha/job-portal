@@ -1,17 +1,20 @@
 import { useState} from "react";
+import api from "../services/api";
+
 function Register(){
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
 
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-
-        console.log(name);
-        console.log(email);
-        console.log(password);
-
+   const handleSubmit = async(e) => {
+    e.preventDefault();
+    try{
+        const response=await api.post("/auth/register",{name,email,password});
+        console.log(response.data);
+    } catch (error) {
+        console.error("Error registering user:", error);
     }
+};
     return(
         <div>
             <h2>Register Page</h2>
