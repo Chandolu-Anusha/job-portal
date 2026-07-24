@@ -7,6 +7,8 @@ import profile from "./pages/login";
 import Jobs from "./pages/Jobs";
 import JobDetails from"./pages/JobDetails";
 import MyApplications from "./pages/MyApplications";
+import ManageJobs from"./pages/ManageJobs";
+import JobApplications from "./pages/JobApplications";
 
 function App(){
   return(
@@ -20,6 +22,8 @@ function App(){
         <Route path="/jobs" element={<Jobs/>}/>
         <Route path="/jobs/:id" element={<JobDetails/>}/>
         <Route path="/my" element={<MyApplications/>}/>
+        <Route path="/manage-jobs" element={<ManageJobs/>}/>
+        <Route path="/applications/:id" element={<JobApplications/>}></Route>
       </Routes>
     </>
   );

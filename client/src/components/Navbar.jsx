@@ -19,6 +19,9 @@ function Navbar(){
                 <li>
                     <Link to="/my">My Applications</Link>
                 </li>
+                <li>
+                    <Link to="/manage-jobs">ManageJobs</Link>
+                </li>
             </ul>
         </nav>
     );

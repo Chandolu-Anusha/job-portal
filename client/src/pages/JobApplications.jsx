@@ -1,0 +1,55 @@
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import api from "../services/api";
+
+function JobApplications() {
+    const { id } = useParams();
+    const [applications, setApplications] = useState([]);
+
+    useEffect(() => {
+        fetchApplications();
+    }, []);
+
+    const fetchApplications = async () => {
+        try {
+            const response = await api.get(`/applications/job/${id}`);
+            setApplications(response.data.applications);
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+    const updateStatus=async(appicationId,status)=>{
+        try{
+            const response=await api.put(
+                `/application/${applicationId}`,
+                {status}
+            );
+            alert(response.data.message);
+            fetchApllication();
+        }catch(error){
+            console.log(error.response.data);
+        }
+    };
+
+    return (
+        <div>
+            <h2>Applicants</h2>
+
+            {applications.map((application) => (
+                <div key={application._id}>
+                    <h3>{application.student.name}</h3>
+                    <p>{application.student.email}</p>
+                    <p>Status: {application.status}</p>
+                    <button onClick={()=> updateStatus(application._id,"accepted")}>
+                        Accept
+                    </button>
+                    <button onClick={()=> updateStatus(application._id,"rejected")}>
+                        Reject
+                    </button>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+export default JobApplications;
