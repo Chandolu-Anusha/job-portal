@@ -6,6 +6,8 @@ const {authMiddleware,studentOnly, recruiterOnly} = require("../middleware/authM
 
 router.post("/:jobId", authMiddleware, studentOnly, applyJob);
 
+router.get("/my",authMiddleware,studentOnly,getMyApplications);
+
 router.get("/job/:jobId",authMiddleware,recruiterOnly,getJobApplications);
 
 router.put("/:applicationId",authMiddleware,recruiterOnly,updateApplicationStatus);

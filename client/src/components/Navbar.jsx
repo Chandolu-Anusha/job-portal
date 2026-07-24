@@ -13,6 +13,12 @@ function Navbar(){
                 <li>
                     <Link to="/register">Register</Link>
                 </li>
+                <li>
+                    <Link to="/jobs">Jobs</Link>
+                </li>
+                <li>
+                    <Link to="/my">My Applications</Link>
+                </li>
             </ul>
         </nav>
     );
