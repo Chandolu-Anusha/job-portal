@@ -9,6 +9,11 @@ import JobDetails from"./pages/JobDetails";
 import MyApplications from "./pages/MyApplications";
 import ManageJobs from"./pages/ManageJobs";
 import JobApplications from "./pages/JobApplications";
+import CreateJob from "./pages/CreateJob";
+import EditJob from "./pages/EditJob";
+import SavedJobs from"./pages/SavedJobs";
+import UploadResume from"./pages/UploadResume";
+
 
 function App(){
   return(
@@ -24,6 +29,10 @@ function App(){
         <Route path="/my" element={<MyApplications/>}/>
         <Route path="/manage-jobs" element={<ManageJobs/>}/>
         <Route path="/applications/:id" element={<JobApplications/>}></Route>
+        <Route path="/create-job" element={<CreateJob/>}></Route>
+        <Route path="/edit-job/:id" element={<EditJob/>}></Route>
+        <Route path="/saved-jobs" element={<SavedJobs/>}></Route>
+        <Route path="/Upload-Resume" element={<UploadResume/>}></Route>
       </Routes>
     </>
   );

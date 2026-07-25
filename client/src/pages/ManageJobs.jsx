@@ -15,6 +15,19 @@ function ManageJobs(){
             console.log(error.response.data);
         }
      };
+     const deleteJob=async(id)=>{
+        const confirmDelete=window.confirm(
+            "Are you sure ! You want to delete this job?"
+        );
+        if(!confirmDelete) return;
+        try{
+            const response=await api.delete(`/jobs/${id}`);
+            alert(response.data.message);
+            fetchJobs();
+        }catch(error){
+            console.log(error.response?.data);
+        }
+     };
      return(
         <div>
             <h2>
@@ -27,6 +40,14 @@ function ManageJobs(){
                     </Link>
                     <p>{job.company}</p>
                     <p>{job.location}</p>
+                    <Link to={`/edit-job/${job._id}`}>
+                       <button>Edit</button>
+                       <button onClick={()=> deleteJob(job._id)}>
+                        Delete
+                       </button>
+                       
+                    </Link>
+                    
                 </div>
             ))}
         </div>

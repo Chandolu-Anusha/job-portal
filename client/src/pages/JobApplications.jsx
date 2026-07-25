@@ -18,14 +18,14 @@ function JobApplications() {
             console.log(error.response.data);
         }
     };
-    const updateStatus=async(appicationId,status)=>{
+    const updateStatus=async(applicationId,status)=>{
         try{
             const response=await api.put(
-                `/application/${applicationId}`,
+                `/applications/${applicationId}`,
                 {status}
             );
             alert(response.data.message);
-            fetchApllication();
+            fetchApplications();
         }catch(error){
             console.log(error.response.data);
         }

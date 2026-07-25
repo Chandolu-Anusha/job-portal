@@ -22,6 +22,15 @@ function Navbar(){
                 <li>
                     <Link to="/manage-jobs">ManageJobs</Link>
                 </li>
+                <li>
+                    <Link to="/create-job">Create Job</Link>
+                </li>
+                <li>
+                    <Link to="/Saved-jobs">Saved Jobs</Link>
+                </li>
+                <li>
+                    <Link to="/Upload-Resume">Upload Resume</Link>
+                </li>
             </ul>
         </nav>
     );
