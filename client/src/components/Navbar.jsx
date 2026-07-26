@@ -31,6 +31,19 @@ function Navbar(){
                 <li>
                     <Link to="/Upload-Resume">Upload Resume</Link>
                 </li>
+                <li>
+                    <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                    <Link to="/change-password">Change Password</Link>
+                </li>
+                <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                    <Link to="logout">Logout</Link>
+                </li>
+                
             </ul>
         </nav>
     );

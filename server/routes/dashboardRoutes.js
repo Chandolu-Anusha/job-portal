@@ -6,8 +6,11 @@ const {recruiterDashboard,studentDashboard}=require("../controllers/dashboardCon
 const { authMiddleware,recruiterOnly,studentOnly} = require("../middleware/authMiddleware");
 const { route } = require("./jobRoutes");
 
-router.get("/recruiter",authMiddleware,recruiterOnly,recruiterDashboard);
-
-router.get("/student",authMiddleware,studentOnly,studentDashboard);
+router.get("/",authMiddleware,(req,res)=>{
+    if(req.user.role === "recruiter"){
+        return recruiterDashboard(req,res);
+    }
+    return studentDashboard(req,res);
+});
 
 module.exports=router;

@@ -13,7 +13,7 @@ function Profile() {
             const response = await api.get("/auth/profile");
             setUser(response.data.user);
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error.response?.data);
         }
     };
 
@@ -23,8 +23,9 @@ function Profile() {
 
             {user && (
                 <>
-                    <p>Name: {user.name}</p>
-                    <p>Email: {user.email}</p>
+                    <p><strong>Name:</strong> {user.name}</p>
+                    <p><strong>Email:</strong>{user.email}</p>
+                    <p><strong>Role:</strong>{user.role}</p>
                 </>
             )}
         </div>
