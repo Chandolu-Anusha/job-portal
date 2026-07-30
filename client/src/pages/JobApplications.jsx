@@ -39,6 +39,19 @@ function JobApplications() {
                 <div key={application._id}>
                     <h3>{application.student.name}</h3>
                     <p>{application.student.email}</p>
+
+                    {application.student.resume ?(
+                        <a
+                            href={`http://localhost:5000/${application.student.resume.replace(/\\/g, "/")}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <button>View Resume</button>
+                        </a>
+                    ) : (
+                        <p>Resume Not Uploaded</p>
+                    )}
+
                     <p>Status: {application.status}</p>
                     <button onClick={()=> updateStatus(application._id,"accepted")}>
                         Accept

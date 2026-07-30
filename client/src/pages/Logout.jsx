@@ -6,10 +6,13 @@ function Logout() {
 
     useEffect(() => {
         localStorage.removeItem("token");
-        navigate("/",{replace:true});
-    }, [navigate]);
+        localStorage.removeItem("user");
 
-    return <h2>Logging out...</h2>;
+        navigate("/login");
+        window.location.reload();
+    }, []);
+
+    return null;
 }
 
 export default Logout;

@@ -2,9 +2,9 @@ const Job = require("../models/Job");
 
 const createJob = async (req, res) => {
     try {
-        const { title, company, location, salary, description } = req.body;
+        const { title, company, location, salary, description ,requirements,jobType,experience } = req.body;
 
-        if (!title || !company || !location || !salary || !description) {
+        if (!title || !company || !location || !salary || !description || !requirements || !jobType || !experience) {
             return res.status(400).json({
                 success: false,
                 message: "Please fill all fields"
@@ -17,6 +17,9 @@ const createJob = async (req, res) => {
             location,
             salary,
             description,
+            requirements,
+            jobType,
+            experience,
             createdBy: req.user.id
         });
 

@@ -26,6 +26,18 @@ const jobSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        requirements:{
+            type:String,
+            default:""
+        },
+        jobType:{
+            type:String,
+            default:""
+        },
+        experience:{
+            type:String,
+            default:""
+        },
         createdBy:{
             type:mongoose.Schema.Types.ObjectId,
             ref:"User",

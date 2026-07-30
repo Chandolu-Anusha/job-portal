@@ -17,6 +17,7 @@ import ChangePassword from"./pages/ChangePassword";
 import Dashboard from "./pages/Dashboard";
 import Logout from"./pages/Logout";
 import RoleProtectedRoute  from "./components/RoleProtectedRoute";
+import EditProfile from "./pages/EditProfile";
 
 
 function App(){
@@ -27,22 +28,64 @@ function App(){
         <Route path="/"  element={<Home/>}/>
         <Route path="/login"  element={<Login/>}/>
         <Route path="/register"  element={<Register/>}/>
-        <Route path="/profile"  element={<Profile/>}/>
         <Route path="/jobs" element={<Jobs/>}/>
         <Route path="/jobs/:id" element={<JobDetails/>}/>
-        <Route path="/my" element={<MyApplications/>}/>
-        <Route path="/manage-jobs" element={<ManageJobs/>}/>
-        <Route path="/applications/:id" element={<JobApplications/>}></Route>
+        <Route path="/my" element={
+          <RoleProtectedRoute role="student">
+            <MyApplications/>
+          </RoleProtectedRoute>
+          }/>
+        <Route path="/manage-jobs" element={
+          <RoleProtectedRoute role="recruiter">
+             <ManageJobs/>
+          </RoleProtectedRoute>
+          }/>
+        <Route path="/applications/:id" element={
+          <RoleProtectedRoute role="recruiter">
+             <JobApplications/>
+          </RoleProtectedRoute>
+         }/>
         <Route path="/create-job" element={
           <RoleProtectedRoute role="recruiter">
             <CreateJob />
           </RoleProtectedRoute>
-    }/>
-        <Route path="/edit-job/:id" element={<EditJob/>}></Route>
-        <Route path="/saved-jobs" element={<SavedJobs/>}></Route>
-        <Route path="/Upload-Resume" element={<UploadResume/>}></Route>
-        <Route path="/change-password" element={<ChangePassword/>}></Route>
-        <Route path="/dashboard" element={<Dashboard/>}></Route>
+        }/>
+        <Route path="/edit-job/:id" element={
+          <RoleProtectedRoute role="recruiter">
+             <EditJob/>
+          </RoleProtectedRoute>
+        }></Route>
+        <Route path="/saved-jobs" element={
+          <RoleProtectedRoute role="student">
+             <SavedJobs/>
+          </RoleProtectedRoute>
+        }/>
+        <Route path="/Upload-Resume" element={
+          <RoleProtectedRoute role="student">
+            <UploadResume/>
+          </RoleProtectedRoute>
+          }/>
+        <Route path="/profile" element={
+          <RoleProtectedRoute role={JSON.parse(localStorage.getItem("user"))?.role}>
+            <Profile />
+          </RoleProtectedRoute>
+          }/>
+          <Route path="/edit-profile" element={
+            <RoleProtectedRoute role={JSON.parse(localStorage.getItem("user"))?.role}>
+              <EditProfile/>
+            </RoleProtectedRoute>
+          }/>
+
+        <Route path="/dashboard" element={
+          <RoleProtectedRoute role={JSON.parse(localStorage.getItem("user"))?.role}>
+            <Dashboard />
+          </RoleProtectedRoute>
+          }/>
+        <Route path="/change-password" element={
+          <RoleProtectedRoute role={JSON.parse(localStorage.getItem("user"))?.role}>
+            <ChangePassword />
+          </RoleProtectedRoute>
+        }/>
         <Route path="/logout" element={<Logout/>}></Route>
         
       </Routes>

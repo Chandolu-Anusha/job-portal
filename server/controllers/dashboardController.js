@@ -1,6 +1,8 @@
 const Job=require("../models/Job");
 const Application=require("../models/Application");
+const SavedJob=require("../models/SavedJob");
 const { stack } = require("../routes/jobRoutes");
+
 
 const recruiterDashboard=async (req,res)=>{
     try{
@@ -52,7 +54,7 @@ const studentDashboard=async(req,res)=>{
         const recentApplications=await Application.find({
             student:req.user.id
         })
-        .populate("job","title comapany location salary")
+        .populate("job","title company location salary")
         .sort({createdAt:-1})
         .limit(5);
         res.status(200).json({

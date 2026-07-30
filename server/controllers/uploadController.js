@@ -3,6 +3,9 @@ const uploadResume = async (req, res) => {
 
     try {
 
+        console.log("File:",req.file);
+        console.log("Usre:",req.user);
+
         if (!req.file) {
 
             return res.status(400).json({
@@ -12,8 +15,14 @@ const uploadResume = async (req, res) => {
 
         }
         const user=await User.findById(req.user.id);
+
+        console.log("Before:",user.resume);
+
         user.resume=req.file.path;
+
         await user.save();
+
+        console.log("After:",user.resume);
 
         res.status(200).json({
 

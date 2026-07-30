@@ -65,7 +65,7 @@ const getJobApplications=async(req,res)=>{
         const {jobId}=req.params;
         const applications=await Application.find({
             job:jobId
-        }).populate("student");
+        }).populate("student", "name email resume");
         res.status(200).json({
             success:true,
             count:applications.length,

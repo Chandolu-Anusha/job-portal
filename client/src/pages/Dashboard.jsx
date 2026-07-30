@@ -4,16 +4,19 @@ import api from "../services/api";
 function Dashboard() {
 
     const [dashboard, setDashboard] = useState(null);
+    const user=JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
         fetchDashboard();
     }, []);
+     
     const fetchDashboard = async () => {
-
+    
+        
     try {
 
         const response = await api.get("/dashboard");
-
+        console.log(response.data);
         setDashboard(response.data);
 
     } catch (error) {
@@ -29,19 +32,47 @@ if(!dashboard){
 
 return (
     <div>
-
         <h2>Dashboard</h2>
 
-        <h3>Total Jobs : {dashboard.totalJobs}</h3>
+        {dashboard.totalJobs !== undefined && (
+            <h3>Total Jobs: {dashboard.totalJobs}</h3>
+        )}
 
-        <h3>Total Applications : {dashboard.totalApplications}</h3>
+        {dashboard.totalApplications !== undefined && (
+            <h3>Total Applications: {dashboard.totalApplications}</h3>
+        )}
 
-        {dashboard.recentApplications?.map(application=>(
-            <div key={application._id}>
-                <p>{application.job.title}</p>
-            </div>
-        ))}
+        {dashboard.totalAppliedJobs !== undefined && (
+            <h3>Total Applied Jobs: {dashboard.totalAppliedJobs}</h3>
+        )}
 
+        {dashboard.totalSavedJobs !== undefined && (
+            <h3>Total Saved Jobs: {dashboard.totalSavedJobs}</h3>
+        )}
+
+        <h3>Recent Applications</h3>
+
+        {dashboard.recentApplications?.length > 0 ? (
+            dashboard.recentApplications.map((application) => (
+                <div key={application._id}>
+                    <p>{application.job?.title}</p>
+                </div>
+            ))
+        ) : (
+            <p>No Recent Applications</p>
+        )}
+
+        <h3>Recent Jobs</h3>
+
+        {dashboard.recentJobs?.length > 0 ? (
+            dashboard.recentJobs.map((job) => (
+                <div key={job._id}>
+                    <p>{job.title}</p>
+                </div>
+            ))
+        ) : (
+            <p>No Recent Jobs</p>
+        )}
     </div>
 );
 }

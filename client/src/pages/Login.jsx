@@ -12,12 +12,16 @@ function Login(){
         e.preventDefault();
         try {
             const response = await api.post("/auth/login", { email, password });
-
+            
             localStorage.setItem("token",response.data.token);
+            localStorage.setItem("user",JSON.stringify(response.data.user));
+            
+
             alert("Login successfull");
             navigate("/");
+            window.location.reload();
         } catch (error) {
-            console.error(error);
+            console.log(error.response?.data);
         }
     };
 

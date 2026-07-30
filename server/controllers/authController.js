@@ -62,7 +62,13 @@ const token=jwt.sign(
 res.status(200).json({
     success:true,
     message:"Login Successful",
-    token
+    token,
+    user:{
+        id:existingUser._id,
+        name:existingUser.name,
+        email:existingUser.email,
+        role:existingUser.role
+    }
 });
 };
 const getProfile=async(req,res)=>
@@ -80,6 +86,43 @@ const getProfile=async(req,res)=>
         });
     }
 };
+
+const uploadResume = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: "Please upload a resume"
+            });
+        }
+
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        user.resume = req.file.path;
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Resume uploaded successfully",
+            resume: user.resume
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 const updateProfile=async(req,res)=>{
     try{
         const user =await User.findById(req.user.id);
@@ -259,6 +302,7 @@ module.exports={
     register,
     login,
     getProfile,
+    uploadResume,
     updateProfile,
     changePassword,
     forgotPassword,

@@ -7,7 +7,10 @@ function CreateJob() {
         company: "",
         location: "",
         salary: "",
-        description: ""
+        description: "",
+        requirements:"",
+        jobType:"Full Time",
+        experience:""
     });
 
     const handleChange = (e) => {
@@ -19,6 +22,7 @@ function CreateJob() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(job);
 
         try {
             const response = await api.post("/jobs", job);
@@ -72,6 +76,35 @@ function CreateJob() {
                     value={job.description}
                     onChange={handleChange}
                 /><br/><br/>
+
+                <br/><br/>
+                <textarea
+                name="requirements"
+                placeholder="Requirements"
+                value={job.requirements}
+                onChange={handleChange}
+                /><br/><br/>
+                
+                <select
+                name="jobType"
+                value={job.jobType}
+                onChange={handleChange}
+                >
+                    <option value="Full Time">Full Time</option>
+                    <option value="Part Time">Part Time</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Remote">Remote</option>
+                </select>
+                <br/><br/>
+                
+                <input
+                type="text"
+                name="experience"
+                placeholder="Experience (e.g. Fresher, 0-2 Years)"
+                value={job.experience}
+                onChange={handleChange}
+                />
+                <br/><br/>
 
                 <button type="submit">
                     Create Job

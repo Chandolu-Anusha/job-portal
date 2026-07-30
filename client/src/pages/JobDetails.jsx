@@ -42,6 +42,9 @@ function JobDetails(){
                 <p><strong>Location:</strong>{job.location}</p>
                 <p><strong>Salary:</strong>{job.salary}</p>
                 <p><strong>Description:</strong>{job.description}</p>
+                <p><strong>Requirements:</strong> {job.requirements}</p>
+                <p><strong>Job Type:</strong> {job.jobType}</p>
+                <p><strong>Experience:</strong> {job.experience}</p>
                 <button onClick={handleApply}>
                     Apply
                 </button>
