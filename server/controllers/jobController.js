@@ -1,4 +1,5 @@
 const Job = require("../models/Job");
+const Application=require("../models/Application");
 
 const createJob = async (req, res) => {
     try {
@@ -78,6 +79,24 @@ const getAllJobs = async (req, res) => {
             .skip(skip)
             .limit(limit);
 
+            let jobsWithAppliedStatus = jobs;
+            
+            if (req.user && req.user.role === "student") {
+                
+                const applications = await Application.find({
+                    student: req.user.id
+                });
+
+                const appliedJobIds = applications.map(application =>
+                    application.job.toString()
+                );
+
+                jobsWithAppliedStatus = jobs.map(job => ({
+                    ...job.toObject(),
+                    applied: appliedJobIds.includes(job._id.toString())
+                }));
+            }
+
         const totalJobs = await Job.countDocuments({
             title: {
                 $regex: keyword,
@@ -100,7 +119,7 @@ const getAllJobs = async (req, res) => {
             totalJobs,
             totalPages: Math.ceil(totalJobs / limit),
             count: jobs.length,
-            jobs
+            jobs:jobsWithAppliedStatus
         });
 
     } catch (error) {
@@ -235,11 +254,48 @@ const getMyJobs = async (req, res) => {
     }
 };
 
+const updateJobStatus = async (req, res) => {
+    try {
+        const job = await Job.findById(req.params.id);
+
+        if (!job) {
+            return res.status(404).json({
+                success: false,
+                message: "Job not found"
+            });
+        }
+
+        if (job.createdBy.toString() !== req.user.id) {
+            return res.status(403).json({
+                success: false,
+                message: "Unauthorized"
+            });
+        }
+
+        job.status = req.body.status;
+
+        await job.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Job status updated successfully",
+            job
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 module.exports = {
     createJob,
     getAllJobs,
     getSingleJob,
     updateJob,
     deleteJob,
-    getMyJobs
+    getMyJobs,
+    updateJobStatus
 };

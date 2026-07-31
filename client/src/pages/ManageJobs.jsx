@@ -15,6 +15,22 @@ function ManageJobs(){
             console.log(error.response.data);
         }
      };
+
+     const updateStatus = async (jobId, status) => {
+    try {
+        const response = await api.put(`/jobs/status/${jobId}`, {
+            status
+        });
+
+        alert(response.data.message);
+
+        fetchJobs();
+
+    } catch (error) {
+        console.log(error.response?.data);
+    }
+};
+
      const deleteJob=async(id)=>{
         const confirmDelete=window.confirm(
             "Are you sure ! You want to delete this job?"
@@ -47,7 +63,16 @@ function ManageJobs(){
                        </button>
                        
                     </Link>
-                    
+                    <p><strong>Status:</strong>{job.status}</p>
+                    {job.status === "Open" ? (
+                        <button onClick={() => updateStatus(job._id, "Closed")}>
+                            Close Job
+                        </button>
+                    ) : (
+                    <button onClick={() => updateStatus(job._id, "Open")}>
+                        Open Job
+                    </button>
+                )}
                 </div>
             ))}
         </div>

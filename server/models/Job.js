@@ -38,6 +38,11 @@ const jobSchema = new mongoose.Schema(
             type:String,
             default:""
         },
+        status:{
+            type:String,
+            enum:["Open","Closed"],
+            default:"Open"
+        },
         createdBy:{
             type:mongoose.Schema.Types.ObjectId,
             ref:"User",

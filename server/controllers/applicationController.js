@@ -12,6 +12,14 @@ const applyJob = async (req, res) => {
                 message:"Job not found"
             });
         }
+
+        if (job.status === "Closed") {
+            return res.status(400).json({
+                success: false,
+                message: "This job is closed. You cannot apply."
+            });
+        }
+
         const existingApplication=await Application.findOne({
             job:jobId,
             student:studentId
@@ -118,10 +126,43 @@ const updateApplicationStatus = async (req, res) => {
         });
     }
 };
+const withdrawApplication = async (req, res) => {
+    try {
+        const application = await Application.findById(req.params.id);
+
+        if (!application) {
+            return res.status(404).json({
+                success: false,
+                message: "Application not found"
+            });
+        }
+
+        if (application.student.toString() !== req.user.id) {
+            return res.status(403).json({
+                success: false,
+                message: "Unauthorized"
+            });
+        }
+
+        await Application.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({
+            success: true,
+            message: "Application withdrawn successfully"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
 
 module.exports = {
     applyJob,
     getMyApplications,
     getJobApplications,
-    updateApplicationStatus
+    updateApplicationStatus,
+    withdrawApplication
 };

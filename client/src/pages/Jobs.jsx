@@ -47,7 +47,7 @@ function Jobs() {
                 onChange={(e) => setSearch(e.target.value)}
             />
 
-           /<input
+            <input
                 type="text"
                 placeholder="Search by location"
                 value={location}

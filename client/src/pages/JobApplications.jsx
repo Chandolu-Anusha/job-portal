@@ -18,7 +18,7 @@ function JobApplications() {
             console.log(error.response.data);
         }
     };
-    const updateStatus=async(applicationId,status)=>{
+    const UpdateStatus=async(applicationId,status)=>{
         try{
             const response=await api.put(
                 `/applications/${applicationId}`,

@@ -33,6 +33,7 @@ function JobDetails(){
         }
     }
 };
+console.log(job);
     return(
         <div>
             {job && (
@@ -45,12 +46,22 @@ function JobDetails(){
                 <p><strong>Requirements:</strong> {job.requirements}</p>
                 <p><strong>Job Type:</strong> {job.jobType}</p>
                 <p><strong>Experience:</strong> {job.experience}</p>
-                <button onClick={handleApply}>
-                    Apply
-                </button>
+                {job.status === "Closed"  ?  (
+                    <button disabled>
+                        Job Closed
+                    </button>
+                ) : job.applied ?(
+                    <button disabled>
+                        Applied
+                    </button>
+                ) : (
+                    <button onClick={handleApply}>
+                        Apply
+                    </button>
+                )}
                 </>
             )}
-        </div>
+            </div>
     );
 }
 export default JobDetails;
