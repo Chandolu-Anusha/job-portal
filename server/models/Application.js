@@ -13,6 +13,42 @@ const applicationSchema=new mongoose.Schema(
             ref:"Job",
             required:true
         },
+        firstName:{
+            type :String,
+            required:true
+        },
+        lastName:{
+            type:String,
+            required:true
+        },
+        email:{
+            type:String,
+            required:true
+        },
+        degree:{
+            type:String,
+            required:true
+        },
+        educationStatus:{
+            type:String,
+            required:true
+        },
+        graduationYear:{
+            type:String,
+            required:true
+        },
+        phone:{
+            type:String,
+            required:true
+        },
+         resume:{
+            type:String,
+            required:true
+        },
+        coverLetter:{
+            type:String,
+            required:true
+        },
         status:
         {
             type:String,

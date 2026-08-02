@@ -52,10 +52,24 @@ return (
 
         <h3>Recent Applications</h3>
 
-        {dashboard.recentApplications?.length > 0 ? (
-            dashboard.recentApplications.map((application) => (
+        {dashboard.recentApplication?.length > 0 ? (
+            dashboard.recentApplication.map((application) => (
                 <div key={application._id}>
-                    <p>{application.job?.title}</p>
+                    <p>
+                        <strong>Name:</strong>{application.firstName} {application.lastName}
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>{application.email}
+                    </p>
+
+                    <p>
+                        <strong>Job:</strong>{application.job?.title}
+                    </p>
+                    <p>
+                        <strong>Status:</strong>{application.status}
+                    </p>
+                    
                 </div>
             ))
         ) : (

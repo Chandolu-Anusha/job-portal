@@ -3,7 +3,21 @@ const Application=require("../models/Application");
 
 const createJob = async (req, res) => {
     try {
-        const { title, company, location, salary, description ,requirements,jobType,experience } = req.body;
+
+        console.log("BODY:",req.body);
+        console.log("FILE:",req.file);
+        
+        const { 
+            title, 
+            company,
+            location, 
+            salary, 
+            description,
+            requirements,
+            jobType,
+            experience } = req.body;
+
+            const companyLogo = req.file ? req.file.path : "";
 
         if (!title || !company || !location || !salary || !description || !requirements || !jobType || !experience) {
             return res.status(400).json({
@@ -15,6 +29,7 @@ const createJob = async (req, res) => {
         const job = await Job.create({
             title,
             company,
+            companyLogo,
             location,
             salary,
             description,
@@ -143,13 +158,22 @@ const getSingleJob = async (req, res) => {
             });
         }
 
-        res.status(200).json({
+        let jobWithAppliedStatus = job.toObject();
+
+        if(req.user && req.user.role === "student"){
+            const application = await Application.findOne({
+                student: req.user.id,
+                job: id
+            });
+            jobWithAppliedStatus.applied = !!application;
+            }
+            res.status(200).json({
             success: true,
-            job
+            job: jobWithAppliedStatus
         });
 
-    } catch (error) {
-        res.status(500).json({
+        } catch (error) {
+            res.status(500).json({
             success: false,
             message: "Server Error"
         });
@@ -161,6 +185,7 @@ const updateJob = async (req, res) => {
         const { id } = req.params;
 
         const job = await Job.findById(id);
+        const companyLogo = req.file ? req.file.path : undefined;
 
         if (!job) {
             return res.status(404).json({
@@ -174,6 +199,10 @@ const updateJob = async (req, res) => {
                 success: false,
                 message: "You can update only your own jobs"
             });
+        }
+
+        if(companyLogo){
+            req.body.companyLogo = companyLogo;
         }
 
         const updatedJob = await Job.findByIdAndUpdate(

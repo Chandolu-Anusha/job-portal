@@ -1,19 +1,23 @@
 import {useState}from"react";
 import {useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {useParams,useNavigate} from "react-router-dom";
 import api from "../services/api";
 
 
 function JobDetails(){
     const{id}=useParams();
+    const navigate=useNavigate();
     const[job,setJob]=useState(null);
     useEffect(()=>{
         fetchJob();
     },[]);
+
     const fetchJob=async()=>{      
         try{
             const response=await api.get(`/jobs/${id}`);
             setJob(response.data.job);
+            console.log(response.data.job);
+
         }catch(error){
             console.error("Error fetching job details:",error);
         }
@@ -46,16 +50,16 @@ console.log(job);
                 <p><strong>Requirements:</strong> {job.requirements}</p>
                 <p><strong>Job Type:</strong> {job.jobType}</p>
                 <p><strong>Experience:</strong> {job.experience}</p>
-                {job.status === "Closed"  ?  (
-                    <button disabled>
-                        Job Closed
-                    </button>
-                ) : job.applied ?(
+                {job.applied   ?  (
                     <button disabled>
                         Applied
                     </button>
+                ) : job.status === "Closed"  ?(
+                    <button disabled>
+                        Job Closed
+                    </button>
                 ) : (
-                    <button onClick={handleApply}>
+                    <button onClick={()=> navigate(`/apply/${job._id}`)}>
                         Apply
                     </button>
                 )}

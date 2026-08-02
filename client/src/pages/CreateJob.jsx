@@ -5,6 +5,7 @@ function CreateJob() {
     const [job, setJob] = useState({
         title: "",
         company: "",
+        companyLogo:null,
         location: "",
         salary: "",
         description: "",
@@ -14,18 +15,29 @@ function CreateJob() {
     });
 
     const handleChange = (e) => {
+        const {name, value , type, files} = e.target;
         setJob({
             ...job,
-            [e.target.name]: e.target.value
+            [name]: type === "file" ? files[0] : value
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(job);
 
         try {
-            const response = await api.post("/jobs", job);
+            const data = new FormData();
+            data.append("title", job.title);
+            data.append("company", job.company);
+            data.append("companyLogo", job.companyLogo);
+            data.append("location", job.location);
+            data.append("salary", job.salary);
+            data.append("description", job.description);
+            data.append("requirements", job.requirements);
+            data.append("jobType", job.jobType);
+            data.append("experience", job.experience);
+
+            const response = await api.post("/jobs", data);
             alert(response.data.message);
         } catch (error) {
             console.log(error.response?.data || error);
@@ -53,6 +65,13 @@ function CreateJob() {
                     value={job.company}
                     onChange={handleChange}
                 /><br/><br/>
+                <label htmlFor="companyLogo">Company Logo</label> :
+                <input type="file"
+                    name="companyLogo"
+                    accept="image/*"
+                    onChange={handleChange}
+                />
+                <br/><br/>
 
                 <input
                     type="text"

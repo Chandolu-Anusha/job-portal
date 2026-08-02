@@ -12,12 +12,12 @@ import JobApplications from "./pages/JobApplications";
 import CreateJob from "./pages/CreateJob";
 import EditJob from "./pages/EditJob";
 import SavedJobs from"./pages/SavedJobs";
-import UploadResume from"./pages/UploadResume";
 import ChangePassword from"./pages/ChangePassword";
 import Dashboard from "./pages/Dashboard";
 import Logout from"./pages/Logout";
 import RoleProtectedRoute  from "./components/RoleProtectedRoute";
 import EditProfile from "./pages/EditProfile";
+import ApplyJob from "./pages/ApplyJob";
 
 
 function App(){
@@ -34,6 +34,11 @@ function App(){
           <RoleProtectedRoute role="student">
             <MyApplications/>
           </RoleProtectedRoute>
+          }/>
+          <Route path="/apply/:id"element={
+            <RoleProtectedRoute role="student">
+              <ApplyJob />
+            </RoleProtectedRoute>
           }/>
         <Route path="/manage-jobs" element={
           <RoleProtectedRoute role="recruiter">
@@ -55,21 +60,19 @@ function App(){
              <EditJob/>
           </RoleProtectedRoute>
         }></Route>
+
         <Route path="/saved-jobs" element={
           <RoleProtectedRoute role="student">
              <SavedJobs/>
           </RoleProtectedRoute>
         }/>
-        <Route path="/Upload-Resume" element={
-          <RoleProtectedRoute role="student">
-            <UploadResume/>
-          </RoleProtectedRoute>
-          }/>
+
         <Route path="/profile" element={
           <RoleProtectedRoute role={JSON.parse(localStorage.getItem("user"))?.role}>
             <Profile />
           </RoleProtectedRoute>
           }/>
+
           <Route path="/edit-profile" element={
             <RoleProtectedRoute role={JSON.parse(localStorage.getItem("user"))?.role}>
               <EditProfile/>
@@ -81,11 +84,13 @@ function App(){
             <Dashboard />
           </RoleProtectedRoute>
           }/>
+
         <Route path="/change-password" element={
           <RoleProtectedRoute role={JSON.parse(localStorage.getItem("user"))?.role}>
             <ChangePassword />
           </RoleProtectedRoute>
         }/>
+
         <Route path="/logout" element={<Logout/>}></Route>
         
       </Routes>

@@ -28,9 +28,6 @@ function Navbar(){
                         <Link to="/saved-jobs">Saved Jobs</Link>
                     </li>
 
-                    <li>
-                        <Link to="/Upload-resume">Upload Resume</Link>
-                    </li>
                     </>
                 )}
                

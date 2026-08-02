@@ -89,6 +89,16 @@ function Jobs() {
                         <Link to={`/jobs/${job._id}`}>
                             <h3>{job.title}</h3>
                         </Link>
+                        {job.companyLogo && (
+                            <img
+                                src={`http://localhost:5000/${job.companyLogo.replace(/\\/g, "/")}`}
+                                alt="Company Logo"
+                                width="80"
+                                height="80"
+                                onError={()=>console.log("Image failed to load")}
+                                onLoad={()=>console.log("Image loaded")}
+                            />
+                        )}
 
                         <p>{job.company}</p>
                         <p>{job.location}</p>

@@ -6,6 +6,17 @@ const applyJob = async (req, res) => {
         const {jobId}=req.params;
         const studentId=req.user.id;
         const job=await Job.findById(jobId);
+        const resume = req.file ? req.file.path:"";
+        const {
+            firstName,
+            lastName,
+            email,
+            degree,
+            educationStatus,
+            graduationYear,
+            phone,
+            coverLetter
+        }=req.body;
         if(!job){
             return res.status(404).json({
                 success:false,
@@ -32,7 +43,17 @@ const applyJob = async (req, res) => {
         }
         const application =await Application.create({
             job:jobId,
-            student:studentId
+            student:studentId,
+
+            firstName,
+            lastName,
+            email,
+            degree,
+            educationStatus,
+            graduationYear,
+            phone,
+            resume,
+            coverLetter
         });
         res.status(201).json({
             success:true,
@@ -60,20 +81,40 @@ const getMyApplications = async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
-
         res.status(500).json({
             success: false,
             message: "Internal Server Error"
         });
     }
 };
-const getJobApplications=async(req,res)=>{
+const getJobApplications = async(req,res)=>{
     try{
-        const {jobId}=req.params;
-        const applications=await Application.find({
+        const {jobId} = req.params;
+
+        const keyword = req.query.keyword || "";
+        const status = req.query.status || "";
+
+        let applications=await Application.find({
             job:jobId
-        }).populate("student", "name email resume");
+        }).populate("student", "resume");
+        
+
+        if(keyword){
+            applications = applications.filter(application => {
+        
+                const fullName = `${application.firstName} ${application.lastName}`.toLowerCase();
+
+                return fullName.includes(keyword.toLowerCase());
+            });
+        }
+
+        if(status){
+            applications = applications.filter(application => 
+                application.status === status
+            );
+        }
+
+
         res.status(200).json({
             success:true,
             count:applications.length,

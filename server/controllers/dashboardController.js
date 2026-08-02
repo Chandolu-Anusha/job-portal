@@ -6,32 +6,57 @@ const { stack } = require("../routes/jobRoutes");
 
 const recruiterDashboard=async (req,res)=>{
     try{
+
         const totalJobs=await Job.countDocuments({
             createdBy:req.user.id
         });
+
         const recruiterJobs=await Job.find({
             createdBy:req.user.id
         });
+
         const jobIds=recruiterJobs.map(job=> job._id);
         const totalApplications=await Application.countDocuments({
             job:{$in:jobIds}
         });
+
         const recentJobs=await Job.find({
             createdBy:req.user.id
         })
         .sort({createdAt:-1})
         .limit(5);
+
         const recentApplication=await Application.find({
             job:{$in:jobIds}
         })
-        .populate("student","name email")
+         .populate("student","firstName lastName email")
         .populate("job","title company")
         .sort({createdAt:-1})
         .limit(5);
+
+        const applications = await Application.find({
+            job: { $in: jobIds }
+        });
+
+        const pending = applications.filter(
+            app => app.status === "pending"
+        ).length;
+
+        const accepted = applications.filter(
+            app => app.status === "accepted"
+        ).length;
+
+        const rejected = applications.filter(
+            app => app.status === "rejected"
+        ).length;
+
         res.status(200).json({
             success:true,
             totalJobs,
             totalApplications,
+            pending,
+            accepted,
+            rejected,
             recentJobs,
             recentApplication
         });

@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/uploadMiddleware")
 
 const { applyJob,getMyApplications,getJobApplications,updateApplicationStatus,withdrawApplication } = require("../controllers/applicationController");
 const {authMiddleware,studentOnly, recruiterOnly} = require("../middleware/authMiddleware");
 
-router.post("/:jobId", authMiddleware, studentOnly, applyJob);
+router.post("/:jobId", authMiddleware, studentOnly,upload.single("resume"),applyJob);
 
 router.get("/my",authMiddleware,studentOnly,getMyApplications);
 

@@ -12,8 +12,6 @@ function Home(){
     const fetchFeaturedJobs = async () => {
     try {
         const response = await api.get("/jobs");
-
-        console.log(response.data);
         setFeaturedJobs(response.data.jobs.slice(0, 3));
 
     } catch (error) {
