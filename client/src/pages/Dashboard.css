@@ -1,0 +1,148 @@
+.dashboard {
+    padding: 30px;
+    background-color: #f5f7fb;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-title {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 220px;
+    padding: 20px;
+    border-radius: 12px;
+    color: rgb(252, 250, 250);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.stat-card h2 {
+    margin-top: 15px;
+    font-size: 34px;
+}
+
+.jobs-card {
+    background: #2563eb;
+}
+
+.applications-card {
+    background: #9333ea;
+}
+
+.applied-card {
+    background: #16a34a;
+}
+
+.saved-card {
+    background: #f59e0b;
+}
+
+.section-title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #333;
+}
+
+
+.application-card {
+    background: white;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-left: 5px solid #2563eb;
+}
+
+.application-card p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+
+.job-card {
+    background: white;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-left: 5px solid #6ded76;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-container {
+        flex-direction: column;
+    }
+
+    .stat-card {
+        width: 100%;
+    }
+}
+/* Recent Section */
+.section-title {
+    margin-top: 35px;
+    margin-bottom: 15px;
+    color: #1f2937;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Application Card */
+.application-card,
+.job-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.application-card:hover,
+.job-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.application-card p,
+.job-card p {
+    margin: 8px 0;
+    color: #374151;
+    font-size: 16px;
+}
+
+/* No Data Message */
+.empty-message {
+    background: rgb(241, 240, 240);
+    padding: 20px;
+    border-radius: 10px;
+    color: #6b7280;
+    text-align: center;
+    font-size: 17px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}

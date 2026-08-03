@@ -1,0 +1,47 @@
+/* Navbar */
+.navbar{
+    background:#1e293b;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 40px;
+}
+
+/* Logo */
+.logo{
+    color:white;
+    font-size:32px;
+    font-weight:bold;
+}
+
+/* Navigation */
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+/* List Items */
+.nav-links li{
+    list-style:none;
+}
+
+/* Links */
+.nav-links a{
+    text-decoration:none;
+    color:white;
+    font-size:18px;
+    font-weight:500;
+    transition:0.3s ease;
+    padding:8px 12px;
+    border-radius:8px;
+}
+
+/* Hover */
+.nav-links a:hover{
+    background:#3b82f6;
+    color:white;
+}

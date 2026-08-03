@@ -1,10 +1,12 @@
 import {Link} from "react-router-dom";
+import "./Navbar.css";
+
 function Navbar(){
     const user=JSON.parse(localStorage.getItem("user"));
     return(
-        <nav>
-            <h1>Job portal</h1>
-            <ul>
+        <nav className="navbar">
+            <div className="logo">Job portal</div>
+            <ul className="nav-links">
                 <li>
                     <Link to="/">Home</Link>
                 </li>

@@ -1,6 +1,8 @@
 import {Link} from "react-router-dom";
 import {useState,useEffect}from "react";
 import api from "../services/api";
+import "./Home.css";
+
 function Home(){
     const [featuredJobs,setFeaturedJobs] = useState([]);
 
@@ -21,34 +23,48 @@ function Home(){
 
 
     return(
-        <div>
-            <section>
+        <div className="home"> 
+            <section className="hero">
                 <h1>Find your Dream Job Today</h1>
                 <p>
                    Discover thousands of opportunities from trusted companies
                     and take the next step in your career.  
                 </p>
+
                 <Link to="/jobs">
                 <button>Browse Jobs</button>
                 </Link>
+
                  <Link to="/register">
                 <button>Register</button>
                 </Link>
+
             </section>
 
-            <section>
-                <h2>Featured Jobs</h2>
+          <section className="featured-section">
+            <h2 className="tile">Featured Jobs</h2>
+
+            <div className="featured-jobs">
+
                 {featuredJobs.map((job) => (
-                    <div key={job._id}>
+                    <div className="job-card" key={job._id}>
                         <h3>{job.title}</h3>
+
                         <p>{job.company}</p>
+
                         <p>{job.location}</p>
 
-                        <Link to={`/jobs/${job._id}`}>
-                        <button>View Details</button>
+                        <Link
+                            to={`/jobs/${job._id}`}
+                            className="view-btn"
+                        >
+                            <button>View Details</button>
                         </Link>
                     </div>
                 ))}
+
+            </div>
+
             </section>
             <section>
                 <h2>Why Choose Us</h2>

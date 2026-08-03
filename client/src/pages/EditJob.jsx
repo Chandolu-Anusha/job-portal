@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import {useState,useEffect}from"react";
 import api from"../services/api";
+import { toast } from 'react-toastify';
 
 function EditJob() {
     const { id } = useParams();
@@ -64,10 +65,10 @@ const handleChange=(e)=>{
             }
 
             const response = await api.put(`/jobs/${id}`, data);
-            alert(response.data.message);
+            toast.success(response.data.message);
             
         }catch(error){
-            console.log(error.response?.data);
+            toast.error("An error occurred while updating the job.");
         }
     };
 

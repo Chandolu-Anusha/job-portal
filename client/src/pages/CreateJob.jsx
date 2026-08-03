@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../services/api";
+import { toast } from 'react-toastify';
 
 function CreateJob() {
     const [job, setJob] = useState({
@@ -38,9 +39,9 @@ function CreateJob() {
             data.append("experience", job.experience);
 
             const response = await api.post("/jobs", data);
-            alert(response.data.message);
+            toast.success(response.data.message);
         } catch (error) {
-            console.log(error.response?.data || error);
+            toast.error("An error occurred while creating the job.");
         }
     };
 

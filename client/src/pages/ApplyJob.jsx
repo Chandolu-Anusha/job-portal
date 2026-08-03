@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {useParams,useNavigate} from "react-router-dom";
 import api from "../services/api";
+import { toast } from 'react-toastify';
 
 function ApplyJob() {
 
@@ -67,7 +68,7 @@ function ApplyJob() {
 
             const response = await api.post(`/applications/${id}`,data);
 
-            alert(response.data.message);
+            toast.success("Application submitted successfully!");
 
             navigate("/my");
 

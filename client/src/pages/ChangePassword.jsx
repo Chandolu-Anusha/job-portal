@@ -1,5 +1,6 @@
 import {useState}from "react";
 import api from "../services/api";
+import {toast} from 'react-toastify';
 
 function ChangePassword(){
     const[password,setPassword]=useState({
@@ -17,13 +18,13 @@ function ChangePassword(){
 
         try{
             const response=await api.put("/auth/change-password",password);
-            alert(response.data.message);
+            toast.success(response.data.message);
             setPassword({
                 oldPassword:"",
                 newPassword:""
             });
         }catch(error){
-            console.log(error.response?.data);
+            toast.error(error.response?.data);
         }
     };
     return(
