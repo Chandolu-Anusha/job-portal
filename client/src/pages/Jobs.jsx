@@ -6,8 +6,8 @@ import "./Jobs.css";
 function Jobs() {
     const [jobs, setJobs] = useState([]);
     const [search, setSearch] = useState("");
-    const [location, setLocation] = useState("");
-    const [company, setCompany] = useState("");
+    const [locationSearch, setLocationSearch] = useState("");
+    const [companySearch, setCompanySearch] = useState("");
 
     useEffect(() => {
         fetchJobs();
@@ -28,17 +28,18 @@ function Jobs() {
             job.company.toLowerCase().includes(search.toLowerCase()) ||
             job.location.toLowerCase().includes(search.toLowerCase());
 
-        const matchesLocation =
-            location === "" || job.location === location;
+            const matchesLocation =
+                (locationSearch === "" ||
+                    job.location.toLowerCase().includes(locationSearch.toLowerCase()));
 
-        const matchesCompany =
-            company === "" || job.company === company;
+            const matchesCompany =
+                (companySearch === "" ||
+                    job.company.toLowerCase().includes(companySearch.toLowerCase()));
 
-        return matchesSearch && matchesLocation && matchesCompany;
+            return matchesSearch && matchesLocation && matchesCompany;
     });
-
     return (
-        <div className="jobs-tilte">
+        <div className="jobs-title">
             <h2>All Jobs</h2>
             <div className="search-bar">
                 <input
@@ -51,36 +52,17 @@ function Jobs() {
                 <input
                     type="text"
                     placeholder="Search by location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
+                    value={locationSearch}
+                    onChange={(e) => setLocationSearch(e.target.value)}
                 />
 
                 <input
                     type="text"
                     placeholder="Search by company"
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
+                    value={companySearch}
+                    onChange={(e) => setCompanySearch(e.target.value)}
                 />
 
-                <select
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                >
-                    <option value="">All Locations</option>
-                    <option value="Hyderabad">Hyderabad</option>
-                    <option value="Bangalore">Bangalore</option>
-                    <option value="Chennai">Chennai</option>
-                </select>
-
-                <select
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
-                >
-                    <option value="">All Companies</option>
-                    <option value="Infosys">Infosys</option>
-                    <option value="TCS">TCS</option>
-                    <option value="Wipro">Wipro</option>
-                </select>
             </div>
 
             <div className="jobs-grid">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import {useParams,useNavigate} from "react-router-dom";
 import api from "../services/api";
 import { toast } from 'react-toastify';
+import "./ApplyJob.css";
 
 function ApplyJob() {
 
@@ -84,10 +85,10 @@ function ApplyJob() {
 };
 
     return (
-        <div>
-            <h2>Job Application Form</h2>
+        <div className="apply-page">
+            <h2 className="apply-title">Job Application Form</h2>
 
-            <form onSubmit={handleSubmit}>
+            <form className="apply-form" onSubmit={handleSubmit}>
 
                 <label>First Name</label><br />
                 <input
@@ -98,7 +99,7 @@ function ApplyJob() {
                     required
                 />
 
-                <br /><br />
+                <br />
 
                 <label>Last Name</label><br />
                 <input
@@ -109,7 +110,7 @@ function ApplyJob() {
                     required
                 />
 
-                <br /><br />
+                <br />
 
                 <label>Email</label><br />
                 <input
@@ -120,7 +121,7 @@ function ApplyJob() {
                     required
                 />
 
-                <br /><br />
+                <br />
 
                 <label>Degree</label><br />
                 <select
@@ -137,33 +138,36 @@ function ApplyJob() {
                     
                 </select>
 
-                <br /><br />
-
-                <label>Education Status</label><br />
-
-                <input
-                    type="radio"
-                    name="educationStatus"
-                    value="Pursuing"
-                    checked={formData.educationStatus === "Pursuing"}
-                    onChange={handleChange}
-                    required
-                />
-                Pursuing
-
                 <br />
 
-                <input
-                    type="radio"
-                    name="educationStatus"
-                    value="Completed"
-                    checked={formData.educationStatus === "Completed"}
-                    onChange={handleChange}
-                    required
-                />
-                Completed
+                <label>Education Status</label><br />
+                <div className="radio-group">
+                    <label>
+                        <input
+                            type="radio"
+                            name="educationStatus"
+                            value="Pursuing"
+                            checked={formData.educationStatus === "Pursuing"}
+                            onChange={handleChange}
+                            required
+                        />
+                        Pursuing
+                    </label>
 
-                <br /><br />
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="educationStatus"
+                            value="Completed"
+                            checked={formData.educationStatus === "Completed"}
+                            onChange={handleChange}
+                            required
+                        />
+                        Completed
+                    </label>
+                    <br />
+                </div>
 
                 {formData.educationStatus === "Pursuing" && (
                     <>
@@ -218,19 +222,21 @@ function ApplyJob() {
                 />
 
                 <br /><br />
+                <div className="checkbox-group">
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="agree"
+                            checked={formData.agree}
+                            onChange={handleChange}
+                            required
+                        />
+                        I agree to the Terms & Conditions
+                    </label>
+                </div>
+                <br />
 
-                <input
-                    type="checkbox"
-                    name="agree"
-                    checked={formData.agree}
-                    onChange={handleChange}
-                    required
-                />
-                I agree to the Terms & Conditions
-
-                <br /><br />
-
-                <button type="submit">
+                <button className="submit-btn" type="submit">
                     Submit Application
                 </button>
 

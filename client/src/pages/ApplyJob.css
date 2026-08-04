@@ -1,0 +1,117 @@
+/*Apply Job Page*/
+.apply-page{
+    background:#f4f7fc;
+    min-height:100vh;
+    padding:40px;
+}
+
+/*Title*/
+.apply-title{
+    text-align:center;
+    font-size:38px;
+    color:#2563eb;
+    margin-bottom:30px;
+}
+
+/*Form Card*/
+.apply-form{
+    max-width:700px;
+    margin:30px auto;
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+/*Labels*/
+.apply-form label{
+    font-size:17px;
+    font-weight:bold;
+    color:#1e293b;
+}
+
+/*Inputs*/
+.apply-form input[type="text"],
+.apply-form input[type="email"],
+.apply-form input[type="file"],
+.apply-form select,
+.apply-form textarea{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    margin-bottom:20px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+    transition:.3s;
+    box-sizing:border-box;
+}
+
+.apply-form input:focus,
+.apply-form select:focus,
+.apply-form textarea:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 8px rgba(37,99,235,.2);
+}
+
+/*Radio Buttons*/
+.apply-form input[type="radio"]{
+    margin-right:8px;
+    margin-top:15px;
+}
+
+.apply-form input[type="checkbox"]{
+    margin-right:10px;
+}
+
+/*Textarea*/
+.apply-form textarea{
+    resize:vertical;
+}
+
+/*Submit Button*/
+.submit-btn{
+    width:30%;
+    padding:14px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.submit-btn:hover{
+    background:#1d4ed8;
+}
+
+.radio-group{
+    display:flex;
+    gap:30px;
+    margin:15px 0 20px;
+}
+
+.radio-group label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:normal;
+}
+.radio-group input[type="radio"]{
+    margin:0;
+      vertical-align:middle;
+  
+}
+
+.checkbox-group{
+    margin:20px 0;
+}
+
+.checkbox-group label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}

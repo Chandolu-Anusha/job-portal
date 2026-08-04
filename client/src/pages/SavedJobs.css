@@ -1,0 +1,73 @@
+.saved-page{
+    background:#f4f7fc;
+    min-height:100vh;
+    padding:40px;
+}
+
+.saved-title{
+    text-align:center;
+    color:#2563eb;
+    font-size:38px;
+    margin-bottom:35px;
+}
+
+.saved-card{
+    max-width:800px;
+    margin:20px auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.saved-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
+}
+
+.saved-job-title{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.saved-company,
+.saved-location{
+    color:#555;
+    margin:8px 0;
+    font-size:17px;
+}
+
+.saved-actions{
+    margin-top:20px;
+    display:flex;
+    gap:15px;
+}
+
+.view-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.view-btn:hover{
+    background:#1d4ed8;
+}
+
+.remove-btn{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.remove-btn:hover{
+    background:#dc2626;
+}

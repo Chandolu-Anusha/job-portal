@@ -2,6 +2,8 @@ import {useState}from"react";
 import {useEffect} from "react";
 import {useParams,useNavigate} from "react-router-dom";
 import api from "../services/api";
+import "./JobDetails.css";
+import {ToastContainer } from "react-toastify";
 
 
 function JobDetails(){
@@ -37,21 +39,36 @@ function JobDetails(){
         }
     }
 };
-console.log(job);
+const handleSave = async () => {
+    try {
+        const response = await api.post(`/saved-jobs/${job._id}`);
+
+        toast.success(response.data.message);
+    } catch (error) {
+        if (error.response) {
+            toast.error(error.response.data.message);
+        } else {
+            toast.error("Something went wrong");
+        }
+    }
+};
+
     return(
-        <div>
+        <div className="job-details">
             {job && (
                 <>
-                <h2>{job.title}</h2>
-                <p><strong>Company:</strong>{job.company}</p>
-                <p><strong>Location:</strong>{job.location}</p>
-                <p><strong>Salary:</strong>{job.salary}</p>
-                <p><strong>Description:</strong>{job.description}</p>
-                <p><strong>Requirements:</strong> {job.requirements}</p>
-                <p><strong>Job Type:</strong> {job.jobType}</p>
-                <p><strong>Experience:</strong> {job.experience}</p>
+                <h2 className="job-title">{job.title}</h2>
+                <div className="job-info">
+                    <p><strong>Company: </strong>{job.company}</p>
+                    <p><strong>Location: </strong>{job.location}</p>
+                    <p><strong>Salary: </strong>{job.salary}</p>
+                    <p><strong>Description: </strong>{job.description}</p>
+                    <p><strong>Requirements: </strong> {job.requirements}</p>
+                    <p><strong>Job Type: </strong> {job.jobType}</p>
+                    <p><strong>Experience: </strong> {job.experience}</p>
+                </div>
                 {job.applied   ?  (
-                    <button disabled>
+                    <button className="disabled-btn"  disabled>
                         Applied
                     </button>
                 ) : job.status === "Closed"  ?(
@@ -59,9 +76,15 @@ console.log(job);
                         Job Closed
                     </button>
                 ) : (
-                    <button onClick={()=> navigate(`/apply/${job._id}`)}>
+                    <div className="job-btn">
+                    <button className="appli-btn" onClick={()=> navigate(`/apply/${job._id}`)} className="apply-btn">
                         Apply
                     </button>
+
+                    <button className="save-btn" onClick={handleSave}>
+                        Save Job
+                    </button>
+                    </div>
                 )}
                 </>
             )}

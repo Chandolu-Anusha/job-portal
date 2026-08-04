@@ -39,7 +39,7 @@ app.use("/api/applications",applicationRoutes);
 
 app.use("/api/upload",uploadRoutes);
 
-app.use("/api/saved",savedJobRoutes);
+app.use("/api/saved-jobs",savedJobRoutes);
 
 app.use("/api/dashboard",dashboardRoutes);
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-
+import "./SavedJobs.css";
 function SavedJobs() {
     const [savedJobs, setSavedJobs] = useState([]);
 
@@ -18,14 +18,14 @@ function SavedJobs() {
     };
 
     return (
-        <div>
-            <h2>Saved Jobs</h2>
+        <div className="saved-page">
+            <h2 className="saved-title">Saved Jobs</h2>
 
             {savedJobs.map((item) => (
-                <div key={item._id}>
-                    <h3>{item.job.title}</h3>
-                    <p>{item.job.company}</p>
-                    <p>{item.job.location}</p>
+                <div className="saved-card" key={item._id}>
+                    <h3 className="saved-job">{item.job.title}</h3>
+                    <p className="saved-company">{item.job.company}</p>
+                    <p className="saved-location">{item.job.location}</p>
                 </div>
             ))}
         </div>
