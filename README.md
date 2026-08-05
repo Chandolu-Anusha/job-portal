@@ -1,38 +1,79 @@
 # MERN Job Portal
 
-##  Project Status
-This project is currently under development.
+## Project Status
+Under Development (Core Features Completed)
 
-##  About
-A full-stack Job Portal web application built using the MERN stack (MongoDB, Express.js, React.js, and Node.js). It allows students/job seekers to search and apply for jobs, while recruiters can post and manage job listings.
+## About
+A full-stack Job Portal web application built using the MERN Stack (MongoDB, Express.js, React.js, and Node.js). It allows students to search, save, and apply for jobs, while recruiters can create, manage, and review job postings and applications.
 
-## Features Completed
+---
+
+## Features
+
+### Authentication
 - User Registration
-- User Login
+- User Login & Logout
 - JWT Authentication
-- Password Hashing using bcrypt
-- MongoDB Database Integration
-- REST API Setup
+- Role-based Access (Student & Recruiter)
 
-## Features in Progress
-- Resume Upload
-- Job Posting
-- Job Application
-- Recruiter Dashboard
+### Student Features
+- View Available Jobs
+- Search & Filter Jobs
+- View Job Details
+- Save Jobs
+- Remove Saved Jobs
+- Apply for Jobs
+- Upload Resume
+- View My Applications
+- Withdraw Applications
+- Edit Profile
 - Student Dashboard
 
+### Recruiter Features
+- Create Jobs
+- Edit Jobs
+- Delete Jobs
+- Open / Close Job Status
+- View Applicants
+- Accept / Reject Applications
+- Recruiter Dashboard
+
+---
+
 ## Tech Stack
+
+### Frontend
 - React.js
+- React Router
+- Axios
+- CSS
+
+### Backend
 - Node.js
 - Express.js
 - MongoDB
+- Mongoose
 - JWT
 - bcrypt
 - Multer
 
-## How to Run
+---
+
+## Future Improvements
+
+- Email Notifications
+- Pagination
+- Advanced Job Filters
+- Admin Panel
+- Company Profile Page
+- Dark Mode
+
+---
+
+## Installation
 
 ### Backend
+
 ```bash
 cd server
 npm install
@@ -40,11 +81,15 @@ npm run dev
 ```
 
 ### Frontend
+
 ```bash
 cd client
 npm install
 npm run dev
 ```
 
-##Author
-Chandolu Anusha
+---
+
+## Author
+
+**Chandolu Anusha**
