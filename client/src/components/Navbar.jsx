@@ -61,10 +61,6 @@ function Navbar(){
                     </li>
 
                     <li>
-                        <Link to="/change-password">Change Password</Link>
-                    </li>
-
-                    <li>
                         <Link to="/logout">Logout</Link>
                     </li>
                    

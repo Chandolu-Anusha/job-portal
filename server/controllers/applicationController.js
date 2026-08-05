@@ -2,12 +2,15 @@ const Application=require("../models/Application");
 const Job=require("../models/Job");
 
 const applyJob = async (req, res) => {
-    try{
-        const {jobId}=req.params;
-        const studentId=req.user.id;
-        const job=await Job.findById(jobId);
-        const resume = req.file ? req.file.path:"";
-        const {
+    try {
+        const { jobId } = req.params;
+        const studentId = req.user.id;
+
+        const job = await Job.findById(jobId);
+
+        const resume = req.file ? req.file.path : "";
+
+        let {
             firstName,
             lastName,
             email,
@@ -16,11 +19,12 @@ const applyJob = async (req, res) => {
             graduationYear,
             phone,
             coverLetter
-        }=req.body;
-        if(!job){
+        } = req.body;
+
+        if (!job) {
             return res.status(404).json({
-                success:false,
-                message:"Job not found"
+                success: false,
+                message: "Job not found"
             });
         }
 
@@ -31,20 +35,26 @@ const applyJob = async (req, res) => {
             });
         }
 
-        const existingApplication=await Application.findOne({
-            job:jobId,
-            student:studentId
+        // Graduation year is only needed for pursuing students
+        if (educationStatus !== "Pursuing") {
+            graduationYear = "";
+        }
+
+        const existingApplication = await Application.findOne({
+            job: jobId,
+            student: studentId
         });
-        if(existingApplication){
+
+        if (existingApplication) {
             return res.status(400).json({
-                success:false,
-                message:"You have already applied for this job"
+                success: false,
+                message: "You have already applied for this job"
             });
         }
-        const application =await Application.create({
-            job:jobId,
-            student:studentId,
 
+        const application = await Application.create({
+            job: jobId,
+            student: studentId,
             firstName,
             lastName,
             email,
@@ -55,14 +65,16 @@ const applyJob = async (req, res) => {
             resume,
             coverLetter
         });
+
         res.status(201).json({
-            success:true,
-            message:"Application submitted successfully",
+            success: true,
+            message: "Application submitted successfully",
             application
         });
-    }catch(error){
+
+    } catch (error) {
         res.status(500).json({
-            success:false,
+            success: false,
             message:"Internal Server Error"
         });
     }

@@ -79,9 +79,9 @@ function ApplyJob() {
                 alert(error.response.data.message);
             } else {
                 alert(error.message);
+       
             }
     }
-
 };
 
     return (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import "./EditProfile.css";
 
 function EditProfile() {
     const [formData, setFormData] = useState({
@@ -49,67 +50,86 @@ function EditProfile() {
             console.log(error.response?.data);
         }
     };
+return (
+    <div className="edit-profile-page">
 
-    return (
-        <div>
-            <h2>Edit Profile</h2>
+        <h2 className="edit-profile-title">Edit Profile</h2>
 
-            <form onSubmit={handleSubmit}>
+        <form className="edit-profile-form" onSubmit={handleSubmit}>
+
+            <div className="form-group">
+                <label>Name</label>
                 <input
                     type="text"
                     name="name"
                     placeholder="Name"
                     value={formData.name || ""}
                     onChange={handleChange}
-                /><br /><br />
+                />
+            </div>
 
+            <div className="form-group">
+                <label>Email</label>
                 <input
                     type="email"
                     name="email"
                     placeholder="Email"
                     value={formData.email || ""}
                     onChange={handleChange}
-                /><br /><br />
+                />
+            </div>
 
+            <div className="form-group">
+                <label>Phone</label>
                 <input
                     type="text"
                     name="phone"
                     placeholder="Phone"
                     value={formData.phone || ""}
                     onChange={handleChange}
-                /><br /><br />
+                />
+            </div>
 
+            <div className="form-group">
+                <label>Location</label>
                 <input
                     type="text"
                     name="location"
                     placeholder="Location"
                     value={formData.location || ""}
                     onChange={handleChange}
-                /><br /><br />
+                />
+            </div>
 
+            <div className="form-group">
+                <label>Bio</label>
                 <textarea
                     name="bio"
                     placeholder="Bio"
                     value={formData.bio || ""}
                     onChange={handleChange}
                 />
+            </div>
 
-                <br /><br />
-
+            <div className="form-group">
+                <label>Skills</label>
                 <input
                     type="text"
                     name="skills"
-                    placeholder="Skills"
+                    placeholder="Skills (HTML, CSS, React...)"
                     value={formData.skills || ""}
                     onChange={handleChange}
                 />
+            </div>
 
-                <br /><br />
+            <button className="update-profile-btn" type="submit">
+                Update Profile
+            </button>
 
-                <button type="submit">Update Profile</button>
-            </form>
-        </div>
-    );
+        </form>
+
+    </div>
+);
 }
 
 export default EditProfile;

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import {useState,useEffect}from"react";
 import api from"../services/api";
 import { toast } from 'react-toastify';
+import "./EditJob.css";
 
 function EditJob() {
     const { id } = useParams();
@@ -71,94 +72,102 @@ const handleChange=(e)=>{
             toast.error("An error occurred while updating the job.");
         }
     };
+return (
+    <div className="edit-job-page">
 
-    return (
-        <div>
-            <h2>Edit Job</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="text" 
-                    name="title" 
-                    value={job.title}
-                    onChange={handleChange}
-                    placeholder="Job Title"
-                />
-                <br/><br/>
-                <input type="text" 
-                    name="company" 
-                    value={job.company}
-                    onChange={handleChange}
-                    placeholder="Company"
-                />
-                <br/><br/>
-                <label>Company Logo</label><br />
-                <input
-                    type="file"
-                    name="companyLogo"
-                    accept="image/*"
-                    onChange={handleChange}
-                />
-                <br /><br />
+        <h2 className="edit-job-title">Edit Job</h2>
 
-                <input type="text" 
-                    name="location" 
-                    value={job.location}
-                    onChange={handleChange}
-                    placeholder="Location"
-                />
-                <br/><br/>
+        <form className="edit-job-form" onSubmit={handleSubmit}>
 
-                <input
-                    type="number"
-                    name="salary"
-                    placeholder="Salary"
-                    value={job.salary}
-                    onChange={handleChange}
-                />
-                <br /><br />
+            <label>Job Title</label>
+            <input
+                type="text"
+                name="title"
+                value={job.title}
+                onChange={handleChange}
+                placeholder="Job Title"
+            />
 
-                <textarea 
-                    name="description"
-                    value={job.description}
-                    onChange={handleChange}
-                    placeholder="description"
-                /><br/><br/>
+            <label>Company</label>
+            <input
+                type="text"
+                name="company"
+                value={job.company}
+                onChange={handleChange}
+                placeholder="Company"
+            />
 
-                <textarea
-                    name="requirements"
-                    placeholder="Requirements"
-                    value={job.requirements}
-                    onChange={handleChange}
-                />
-                <br /><br />
-                
-                <select
-                    name="jobType"
-                    value={job.jobType}
-                    onChange={handleChange}
-                >
-                    <option value="Full Time">Full Time</option>
-                    <option value="Part Time">Part Time</option>
-                    <option value="Internship">Internship</option>
-                    <option value="Remote">Remote</option>
-                </select>
-                <br /><br />
+            <label>Company Logo</label>
+            <input
+                type="file"
+                name="companyLogo"
+                accept="image/*"
+                onChange={handleChange}
+            />
 
-                <input
-                    type="text"
-                    name="experience"
-                    placeholder="Experience"
-                    value={job.experience}
-                    onChange={handleChange}
-                />
-                <br /><br />
+            <label>Location</label>
+            <input
+                type="text"
+                name="location"
+                value={job.location}
+                onChange={handleChange}
+                placeholder="Location"
+            />
 
-                <button type="Submit">
-                    Update Job
-                </button>
+            <label>Salary</label>
+            <input
+                type="number"
+                name="salary"
+                placeholder="Salary"
+                value={job.salary}
+                onChange={handleChange}
+            />
 
-            </form>
-        </div>
-    );
+            <label>Description</label>
+            <textarea
+                name="description"
+                value={job.description}
+                onChange={handleChange}
+                placeholder="Description"
+            />
+
+            <label>Requirements</label>
+            <textarea
+                name="requirements"
+                placeholder="Requirements"
+                value={job.requirements}
+                onChange={handleChange}
+            />
+
+            <label>Job Type</label>
+            <select
+                name="jobType"
+                value={job.jobType}
+                onChange={handleChange}
+            >
+                <option value="Full Time">Full Time</option>
+                <option value="Part Time">Part Time</option>
+                <option value="Internship">Internship</option>
+                <option value="Remote">Remote</option>
+            </select>
+
+            <label>Experience</label>
+            <input
+                type="text"
+                name="experience"
+                placeholder="Experience"
+                value={job.experience}
+                onChange={handleChange}
+            />
+
+            <button className="update-btn" type="submit">
+                Update Job
+            </button>
+
+        </form>
+
+    </div>
+);
 }
 
 export default EditJob;

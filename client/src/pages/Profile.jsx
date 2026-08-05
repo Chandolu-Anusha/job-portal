@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import "./Profile.css";
+import "./ChangePassword.css";
 
 function Profile() {
     const [user, setUser] = useState(null);
@@ -35,12 +36,14 @@ function Profile() {
                     <p><strong>Bio: </strong>{user.bio  || "Not added yet"}</p>
                     <p><strong>Skills: </strong>{user.skills || "Not added yet"}</p>
 
-                    <Link to="/change-password">
-                       <button className="profile-btn">Change Password</button>
-                    </Link>
-                    <Link to="/edit-profile">
-                        <button className="profile-btn">Edit Profile</button>
-                    </Link>
+                   <div className="profile-action">
+                        <Link to="/edit-profile">
+                            <button className="profile-btn">Edit Profile</button>
+                        </Link>
+                        <Link to="/change-password">
+                        <button className="profile-btn">Change Password</button>
+                        </Link>
+                    </div>
                 </div>
             )}
         </div>

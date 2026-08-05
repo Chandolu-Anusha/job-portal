@@ -1,18 +1,16 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "./Logout.css";
 
 function Logout() {
     const navigate = useNavigate();
     const shown = useRef(false);
 
     useEffect(() => {
+        
         if (shown.current) return;
-
         shown.current = true;
-
-        toast.success("Logged out successfully");
-
         setTimeout(() => {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
@@ -21,7 +19,14 @@ function Logout() {
         }, 1000);
     }, []);
 
-    return null;
+    return (
+    <div className="logout-page">
+        <div className="logout-card">
+            <h2>Logging Out...</h2>
+            <p>Please wait...</p>
+        </div>
+    </div>
+);
 }
 
 export default Logout;

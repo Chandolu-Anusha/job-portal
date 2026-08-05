@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../services/api";
 import { toast } from 'react-toastify';
+import "./CreateJob.css";
 
 function CreateJob() {
     const [job, setJob] = useState({
@@ -46,87 +47,103 @@ function CreateJob() {
     };
 
     return (
-        <div>
-            <h2>Create Job</h2>
+        <div className="create-job-page">
+            <h2 className="create-job-title">Create Job</h2>
 
-            <form onSubmit={handleSubmit}>
-
+            <form className="create-job-form" onSubmit={handleSubmit}>
+                <label>Job Title</label>
                 <input
                     type="text"
                     name="title"
                     placeholder="Job Title"
                     value={job.title}
                     onChange={handleChange}
+                    required
                 /><br/><br/>
-
+                
+                <label>Company</label>
                 <input
                     type="text"
                     name="company"
                     placeholder="Company"
                     value={job.company}
                     onChange={handleChange}
+                    required
                 /><br/><br/>
-                <label htmlFor="companyLogo">Company Logo</label> :
+
+                <label>Company Logo</label>
                 <input type="file"
                     name="companyLogo"
                     accept="image/*"
                     onChange={handleChange}
+                    required
                 />
                 <br/><br/>
-
+                <label>Location</label>
                 <input
                     type="text"
                     name="location"
                     placeholder="Location"
                     value={job.location}
                     onChange={handleChange}
+                    required
                 /><br/><br/>
 
+                <label>Salary</label>
                 <input
                     type="number"
                     name="salary"
                     placeholder="Salary"
                     value={job.salary}
                     onChange={handleChange}
+                    required
                 /><br/><br/>
 
+                <label>Description</label>
                 <textarea
                     name="description"
                     placeholder="Description"
                     value={job.description}
                     onChange={handleChange}
+                    required
                 /><br/><br/>
 
-                <br/><br/>
+                <label>Requirements</label>
                 <textarea
                 name="requirements"
                 placeholder="Requirements"
                 value={job.requirements}
                 onChange={handleChange}
+                required
                 /><br/><br/>
                 
+                <label>Job Type</label>
                 <select
                 name="jobType"
                 value={job.jobType}
                 onChange={handleChange}
+                required
                 >
                     <option value="Full Time">Full Time</option>
                     <option value="Part Time">Part Time</option>
                     <option value="Internship">Internship</option>
                     <option value="Remote">Remote</option>
                 </select>
+            
                 <br/><br/>
                 
+                <label>Experience</label>
                 <input
                 type="text"
                 name="experience"
                 placeholder="Experience (e.g. Fresher, 0-2 Years)"
                 value={job.experience}
                 onChange={handleChange}
+                required
                 />
                 <br/><br/>
 
-                <button type="submit">
+                <button className="create-btn" type="submit">
                     Create Job
                 </button>
 

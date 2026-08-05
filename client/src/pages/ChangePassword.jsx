@@ -1,6 +1,7 @@
 import {useState}from "react";
 import api from "../services/api";
 import {toast} from 'react-toastify';
+import "./ChangePassword.css";
 
 function ChangePassword(){
     const[password,setPassword]=useState({
@@ -27,33 +28,49 @@ function ChangePassword(){
             toast.error(error.response?.data);
         }
     };
-    return(
-        <div>
-            <h2>Change Password</h2>
-            <form onSubmit={handleSubmit}>
-                <input 
-                type="password"
-                name="oldPassword"
-                placeholder="Current Password"
-                value={password.oldPassword}
-                onChange={handleChange}
-                /><br/><br/>
-                 <input
+    return (
+    <div className="change-password-page">
+
+        <h2 className="change-password-title">
+            Change Password
+        </h2>
+
+        <form className="change-password-form" onSubmit={handleSubmit}>
+
+            <div className="form-group">
+                <label>Current Password</label>
+                <input
+                    type="password"
+                    name="currentPassword"
+                    placeholder="Enter Current Password"
+                    value={password.currentPassword}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+
+            <div className="form-group">
+                <label>New Password</label>
+                <input
                     type="password"
                     name="newPassword"
-                    placeholder="New Password"
+                    placeholder="Enter New Password"
                     value={password.newPassword}
                     onChange={handleChange}
+                    required
                 />
+            </div>
 
-                <br /><br />
+            <button
+                className="change-password-btn"
+                type="submit"
+            >
+                Update Password
+            </button>
 
-                <button type="submit">
-                    Change Password
-                </button>
+        </form>
 
-            </form>
-        </div>
-    )
+    </div>
+);
 }
 export default ChangePassword;

@@ -2,11 +2,14 @@ import { useState} from "react";
 import {useNavigate}from "react-router-dom";
 import api from "../services/api";
 import {toast} from 'react-toastify';
+import "./Register.css";
 
 function Register(){
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
+    const [role, setRole] = useState("student");
+
     const navigate=useNavigate();
 
    const handleSubmit = async(e) => {
@@ -16,6 +19,7 @@ function Register(){
             name,
             email,
             password,
+            role,
         });
         toast.success("Registration successful! Please login.");
         setName("");
@@ -26,40 +30,71 @@ function Register(){
         toast.error("Error registering user:");
     }
 };
-    return(
-        <div>
-            <h2>Register Page</h2>
-            
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Full Name</label><br/>
-                    <input type="text" placeholder="Enter your name"
-                    value={name}
-                    onChange={(e)=>setName(e.target.value)}
-                    />
+   return(
+    <div className="auth-page">
 
-                </div>
-                <br/>
-                <div>
-                    <label>Email</label><br/>
-                    <input type="email" placeholder="Enter your email"
-                    value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
+        <div className="auth-card">
+
+            <h2 className="auth-title">
+                Register
+            </h2>
+
+            <form onSubmit={handleSubmit}>
+
+                <div className="form-group">
+                    <label>Full Name</label>
+                    <input
+                        type="text"
+                        placeholder="Enter your name"
+                        value={name}
+                        onChange={(e)=>setName(e.target.value)}
                     />
                 </div>
-                <br/>
-                <div>
-                    <label>Password</label><br/>
-                    <input type="password" placeholder="Enter password"
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
+
+
+                <div className="form-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value)}
                     />
                 </div>
-                <br/>
-                
-                <button type="submit">Register</button>
+
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Role</label>
+
+                    <select
+                        value={role}
+                        onChange={(e)=>setRole(e.target.value)}
+                    >
+                        <option value="student">Student</option>
+                        <option value="recruiter">Recruiter</option>
+
+                    </select>
+                </div>
+
+
+                <button className="auth-btn" type="submit">
+                    Register
+                </button>
+
             </form>
+
         </div>
-    );
+
+    </div>
+);
 }
 export default Register;

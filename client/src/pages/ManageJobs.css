@@ -1,0 +1,101 @@
+.manage-page{
+    background:#f4f7fc;
+    min-height:100vh;
+    padding:40px;
+}
+
+.manage-title{
+    text-align:center;
+    color:#2563eb;
+    font-size:38px;
+    margin-bottom:35px;
+}
+
+.manage-card{
+    max-width:800px;
+    margin:25px auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.manage-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
+}
+
+.job-link{
+    text-decoration:none;
+}
+
+.job-title{
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.manage-card p{
+    margin:10px 0;
+    color:#555;
+    font-size:17px;
+}
+
+.manage-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+.edit-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.edit-btn:hover{
+    background:#1d4ed8;
+}
+
+.delete-btn{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#dc2626;
+}
+
+.close-btn{
+    background:#f59e0b;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.close-btn:hover{
+    background:#d97706;
+}
+
+.open-btn{
+    background:#10b981;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.open-btn:hover{
+    background:#059669;
+}

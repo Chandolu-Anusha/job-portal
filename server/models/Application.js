@@ -35,7 +35,9 @@ const applicationSchema=new mongoose.Schema(
         },
         graduationYear:{
             type:String,
-            required:true
+            required:function(){
+                return this.educationStatus === "Pursuing";
+            }
         },
         phone:{
             type:String,

@@ -6,19 +6,19 @@
 
 .saved-title{
     text-align:center;
-    color:#2563eb;
+    color:#0e0e0e;
     font-size:38px;
     margin-bottom:35px;
 }
 
 .saved-card{
-    max-width:800px;
-    margin:20px auto;
     background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    transition:.3s;
+    border-radius: 15px;
+    padding: 25px;
+    border-left: 5px solid #2563eb;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    margin-bottom: 25px;
+    width: 50%;
 }
 
 .saved-card:hover{
@@ -27,13 +27,13 @@
 }
 
 .saved-job-title{
-    color:#2563eb;
+    color:#010612;
     margin-bottom:10px;
 }
 
 .saved-company,
 .saved-location{
-    color:#555;
+    color:#212020;
     margin:8px 0;
     font-size:17px;
 }
@@ -58,16 +58,53 @@
     background:#1d4ed8;
 }
 
-.remove-btn{
-    background:#ef4444;
+
+.saved-view-btn{
+    display:inline-block;
+    margin-top:20px;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    padding:10px 20px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.saved-view-btn:hover{
+    background:#1d4ed8;
+}
+
+.saved-actions{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+}
+
+.saved-view-btn{
+    text-decoration:none;
+    background:#2563eb;
+    color:white;
+    padding:10px 20px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.saved-view-btn:hover{
+    background:#1d4ed8;
+}
+/*remove button*/
+
+.saved-remove-btn{
+    background:#f02727;
     color:white;
     border:none;
     padding:10px 20px;
     border-radius:8px;
     cursor:pointer;
+    font-size:16px;
     transition:.3s;
 }
 
-.remove-btn:hover{
+.saved-remove-btn:hover{
     background:#dc2626;
 }

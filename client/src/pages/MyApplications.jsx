@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
-import "./MyApplication.css";
+import "./MyApplications.css";
+
 function MyApplications() {
     const [applications, setApplications] = useState([]);
 
@@ -35,18 +36,18 @@ function MyApplications() {
 };
 
     return (
-        <div className="application-page">
-            <h2 className="application-title">My Applications</h2>
+        <div className="my-applications-page">
+            <h2 className="my-applications-title">My Applications</h2>
 
             {applications.map((application) => (
-                <div className="application-card" key={application._id}>
-                    <h3 className="job-title">{application.job.title}</h3>
+                <div className="my-applications-card" key={application._id}>
+                    <h3 className="my-job-title">{application.job.title}</h3>
 
-                    <p className="company-name">{application.job.company}</p>
+                    <p className="my-company-name">{application.job.company}</p>
 
-                    <p className="status">Status: {application.status}</p>
+                    <p className="my-status">Status: {application.status}</p>
 
-                    <button className="cancel-btn" onClick={()=>handleWithdraw(application._id)}>
+                    <button className="my-cancel-btn" onClick={()=>handleWithdraw(application._id)}>
                         Cancel
                     </button>
                 </div>

@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {useParams,useNavigate} from "react-router-dom";
 import api from "../services/api";
 import "./JobDetails.css";
-import {ToastContainer } from "react-toastify";
+import {toast } from "react-toastify";
 
 
 function JobDetails(){

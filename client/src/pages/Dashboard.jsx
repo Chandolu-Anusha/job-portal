@@ -85,7 +85,7 @@ return (
                 </div>
             ))
         ) : (
-            <p className="Empty-message">No Recent Applications</p>
+            <div className="Empty-message">No Recent Applications</div>
         )}
 
         <h3 className="section-title">Recent Jobs</h3>
@@ -97,7 +97,7 @@ return (
                 </div>
             ))
         ) : (
-            <p className="empty-message">No Recent Jobs</p>
+            <div className="empty-message">No Recent Jobs</div>
         )}
 
     </div>

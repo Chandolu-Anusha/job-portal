@@ -68,9 +68,7 @@
     box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 
-/* ===========================
-   Company Logo
-=========================== */
+/*Company Logo*/
 
 .company-logo{
     width:80px;
@@ -80,9 +78,7 @@
     display:block;
 }
 
-/* ===========================
-   Job Title
-=========================== */
+/*Job Title*/
 
 .job-card h3{
     color:#2563eb;
@@ -94,9 +90,7 @@
     color:#1d4ed8;
 }
 
-/* ===========================
-   Job Details
-=========================== */
+/*Job Details*/
 
 .job-card p{
     color:#555;
@@ -104,9 +98,7 @@
     margin:10px 0;
 }
 
-/* ===========================
-   Button
-=========================== */
+/*Button*/
 
 .details-btn{
     background:#2563eb;
@@ -124,9 +116,7 @@
     background:#1d4ed8;
 }
 
-/* ===========================
-   No Jobs
-=========================== */
+/*No Jobs*/
 
 .jobs-page h3{
     text-align:center;

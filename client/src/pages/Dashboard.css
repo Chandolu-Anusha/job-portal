@@ -7,7 +7,7 @@
 
 .dashboard-title {
     font-size: 32px;
-    color: #333;
+    color:#070707;
     margin-bottom: 25px;
 }
 
@@ -18,45 +18,57 @@
     margin-bottom: 40px;
 }
 
-.stat-card {
-    flex: 1;
-    min-width: 220px;
-    padding: 20px;
-    border-radius: 12px;
-    color: rgb(252, 250, 250);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    transition: transform 0.3s;
+.stat-card{
+    flex:1;
+    min-width:220px;
+    padding:25px;
+    border-radius:15px;
+    background:#dcfce7;
+    border-left:5px solid #2563eb;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.3s;
+    color:#212020;
 }
 
-.stat-card:hover {
-    transform: translateY(-5px);
+.stat-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
 }
 
-.stat-card h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 500;
+.stat-card h2{
+    color:#010612;
+    font-size:34px;
+    margin-top:15px;
 }
 
-.stat-card h2 {
-    margin-top: 15px;
-    font-size: 34px;
+.stat-card h3{
+    color:#00030a;
+    font-size:18px;
+    font-weight:00;
 }
 
-.jobs-card {
-    background: #2563eb;
-}
-
-.applications-card {
-    background: #9333ea;
+.jobs-card,
+.applications-card{
+    background:#dcfce7;
 }
 
 .applied-card {
-    background: #16a34a;
+    background: #f7f8f8;
+    border-radius: 15px;
+    padding: 25px;
+    border-left: 5px solid #2563eb;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    margin-bottom: 25px;
+    
 }
 
-.saved-card {
-    background: #f59e0b;
+.saved-card{
+    background: #f2f6f3;
+    border-radius: 15px;
+    padding: 25px;
+    border-left: 5px solid #2563eb;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    margin-bottom: 25px;
 }
 
 .section-title {
@@ -68,12 +80,13 @@
 
 
 .application-card {
-    background: white;
+    background: rgb(248, 246, 246);
     border-radius: 10px;
     padding: 18px;
     margin-bottom: 15px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     border-left: 5px solid #2563eb;
+    border-top:4px solid #2563eb;
 }
 
 .application-card p {
@@ -91,6 +104,7 @@
     border-left: 5px solid #6ded76;
     font-size: 17px;
     font-weight: 500;
+    border-top:4px solid #10b981;
 }
 
 /* Responsive */
@@ -100,7 +114,7 @@
     }
 
     .stat-card {
-        width: 100%;
+        width: 50%;
     }
 }
 /* Recent Section */
@@ -146,3 +160,26 @@
     font-size: 17px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
+
+/* Better Empty Message */
+.empty-message{
+    background:#ffffff;
+    border:2px dashed #cbd5e1;
+    border-radius:12px;
+    padding:25px;
+    text-align:center;
+    color:#6b7280;
+    font-size:18px;
+    font-weight:500;
+    margin:15px 0 30px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+/* Empty message icon */
+.empty-message::before{
+    display:block;
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+

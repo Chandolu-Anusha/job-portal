@@ -17,6 +17,7 @@ function JobApplications() {
 
             const response = await api.get(`/applications/job/${id}?keyword=${keyword}&status=${status}`);
             setApplications(response.data.applications);
+            console.log(response.data.applications);
 
         } catch (error) {
 
@@ -38,87 +39,95 @@ function JobApplications() {
     };
 
     return (
-        
+    <div className="applications-page">
 
+        <h2 className="applications-title">Applicants</h2>
 
+        <div className="filter-box">
 
-        <div>
-            <h2>Applicants</h2>
+            <input
+                type="text"
+                placeholder="Search by applicant name..."
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+            />
 
-            <div style={{ marginBottom: "20px" }}>
-                <input
-                    type="text"
-                    placeholder="Search by applicant name..."
-                    value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
-               />
+            <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+            >
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="accepted">Accepted</option>
+                <option value="rejected">Rejected</option>
+            </select>
 
-                <select
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    style={{ marginLeft: "10px" }}
-                >
-                    <option value="">All Status</option>
-                    <option value="pending">Pending</option>
-                    <option value="accepted">Accepted</option>
-                    <option value="rejected">Rejected</option>
-                </select>
-            </div>
+        </div>
 
+        {applications.map((application) => (
+            <div className="application-card" key={application._id}>
 
-            {applications.map((application) => (
-                <div key={application._id}>
-                    <h3>{application.firstName}{application.lastName}</h3>
+                <h3 className="applicant-name">
+                    {application.firstName} {application.lastName}
+                </h3>
 
+                <p><strong>Email:</strong> {application.email}</p>
+
+                <p><strong>Degree:</strong> {application.degree}</p>
+
+                <p><strong>Education:</strong> {application.educationStatus}</p>
+
+                {application.educationStatus === "Pursuing" && (
                     <p>
-                        <strong>Email:</strong>{application.email}
+                        <strong>Graduation Year:</strong> {application.graduationYear}
                     </p>
+                )}
 
-                    <p>
-                        <strong>Degree:</strong>{application.degree}
-                    </p>
+                <p><strong>Phone:</strong> {application.phone}</p>
 
-                    <p>
-                        <strong>Status:</strong>{application.educationStatus}
-                    </p>
+                <p><strong>Cover Letter:</strong> {application.coverLetter}</p>
 
-                    {application.educationStatus === "Pursuing" && (
-                        <p>
-                            <strong>Graduation Year:</strong>{application.graduationYear}
-                        </p>
-                    )}
+                <p><strong>Application Status:</strong> {application.status}</p>
 
-                    <p>
-                        <strong>Phone:</strong>{application.phone}
-                    </p>
+                <div className="application-buttons">
 
-                    <p>
-                        <strong>Cover Letter:</strong>{application.coverLetter}
-                    </p>
-
-                    {application.student.resume ?(
+                    {application.student.resume ? (
                         <a
                             href={`http://localhost:5000/${application.student.resume.replace(/\\/g, "/")}`}
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <button>View Resume</button>
+                            <button className="resume-btn">
+                                View Resume
+                            </button>
                         </a>
                     ) : (
-                        <p>Resume Not Uploaded</p>
+                        <button className="resume-btn" disabled>
+                            Resume Not Uploaded
+                        </button>
                     )}
 
-                    <p>Status: {application.status}</p>
-                    <button onClick={()=> updateStatus(application._id,"accepted")}>
+                    <button
+                        className="accept-btn"
+                        onClick={() => updateStatus(application._id, "accepted")}
+                    >
                         Accept
                     </button>
-                    <button onClick={()=> updateStatus(application._id,"rejected")}>
+
+                    <button
+                        className="reject-btn"
+                        onClick={() => updateStatus(application._id, "rejected")}
+                    >
                         Reject
                     </button>
+
                 </div>
-            ))}
-        </div>
-    );
+
+            </div>
+        ))}
+
+    </div>
+);
 }
 
 export default JobApplications;

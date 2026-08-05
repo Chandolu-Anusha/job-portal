@@ -1,6 +1,7 @@
 import { useState,useEffect } from"react";
 import {Link}from "react-router-dom";
 import api from "../services/api";
+import "./ManageJobs.css";
 
 function ManageJobs(){
     const [jobs,setJobs]=useState([]);
@@ -44,38 +45,60 @@ function ManageJobs(){
             console.log(error.response?.data);
         }
      };
-     return(
-        <div>
-            <h2>
-                Manage Jobs
-            </h2>
-            {jobs.map((job)=>(
-                <div key={job._id}>
-                    <Link to={`/applications/${job._id}`}>
-                    <h3>{job.title}</h3>
-                    </Link>
-                    <p>{job.company}</p>
-                    <p>{job.location}</p>
+return (
+    <div className="manage-page">
+        <h2 className="manage-title">Manage Jobs</h2>
+
+        {jobs.map((job) => (
+            <div className="manage-card" key={job._id}>
+
+                <Link
+                    to={`/applications/${job._id}`}
+                    className="job-link"
+                >
+                    <h3 className="job-title">{job.title}</h3>
+                </Link>
+
+                <p><strong>Company:</strong> {job.company}</p>
+                <p><strong>Location:</strong> {job.location}</p>
+                <p><strong>Status:</strong> {job.status}</p>
+
+                <div className="manage-buttons">
+
                     <Link to={`/edit-job/${job._id}`}>
-                       <button>Edit</button>
-                       <button onClick={()=> deleteJob(job._id)}>
-                        Delete
-                       </button>
-                       
+                        <button className="edit-btn">
+                            Edit
+                        </button>
                     </Link>
-                    <p><strong>Status:</strong>{job.status}</p>
+
+                    <button
+                        className="delete-btn"
+                        onClick={() => deleteJob(job._id)}
+                    >
+                        Delete
+                    </button>
+
                     {job.status === "Open" ? (
-                        <button onClick={() => updateStatus(job._id, "Closed")}>
+                        <button
+                            className="close-btn"
+                            onClick={() => updateStatus(job._id, "Closed")}
+                        >
                             Close Job
                         </button>
                     ) : (
-                    <button onClick={() => updateStatus(job._id, "Open")}>
-                        Open Job
-                    </button>
-                )}
+                        <button
+                            className="open-btn"
+                            onClick={() => updateStatus(job._id, "Open")}
+                        >
+                            Open Job
+                        </button>
+                    )}
+
                 </div>
-            ))}
-        </div>
-     );
+
+            </div>
+        ))}
+    </div>
+);
 }
 export default ManageJobs;
