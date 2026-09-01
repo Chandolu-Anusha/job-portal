@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Backend origin (single source of truth for API + uploaded files)
-export const API_ORIGIN = "http://localhost:5000";
+export const API_ORIGIN = "https://job-portal-1-48xe.onrender.com";
 
 const api=axios.create({
     baseURL:`${API_ORIGIN}/api`,
