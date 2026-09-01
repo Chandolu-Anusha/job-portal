@@ -1,70 +1,145 @@
-.create-job-page{
-    background:#f4f7fc;
-    min-height:100vh;
-    padding:40px;
+/* ============================================================
+   Create Job — clean form card, consistent field rhythm
+   ============================================================ */
+
+.create-job-page {
+  background: var(--bg-page);
+  min-height: 100vh;
 }
 
-.create-job-title{
-    text-align:center;
-    color:#2563eb;
-    font-size:38px;
-    margin-bottom:35px;
+.create-job-page .page-container {
+  max-width: 760px;
 }
 
-.create-job-form{
-    max-width:700px;
-    margin:auto;
-    background:white;
-    padding:35px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+.create-job-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin-bottom: 6px;
 }
 
-.create-job-form label{
-    display:block;
-    font-weight:bold;
-    margin-top:18px;
-    margin-bottom:8px;
-    color:#1f2937;
+.create-job-subtitle {
+  font-size: 14.5px;
+  color: var(--text-soft);
+  margin-bottom: 26px;
 }
 
+/* Form card */
+.create-job-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 30px 28px;
+}
+
+/* Neutralize <br/> gaps */
+.create-job-form br {
+  display: none;
+}
+
+/* Labels */
+.create-job-form label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 18px 0 7px;
+}
+
+.create-job-form label:first-child {
+  margin-top: 0;
+}
+
+/* Inputs */
 .create-job-form input,
 .create-job-form textarea,
-.create-job-form select{
-    width:100%;
-    padding:12px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    font-size:16px;
-    box-sizing:border-box;
+.create-job-form select {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 14.5px;
+  color: var(--text-strong);
+  background: var(--bg-card);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.create-job-form textarea{
-    min-height:120px;
-    resize:vertical;
+.create-job-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.create-job-form input::placeholder,
+.create-job-form textarea::placeholder {
+  color: #9ca3af;
+}
+
+.create-job-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748b' d='M1.41 0 6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 36px;
+}
+
+.create-job-form input[type="file"] {
+  padding: 9px 12px;
+  color: var(--text-soft);
+  cursor: pointer;
+}
+
+.create-job-form input[type="file"]::file-selector-button {
+  margin-right: 14px;
+  border: none;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+
+.create-job-form input[type="file"]::file-selector-button:hover {
+  background: rgba(37, 99, 235, 0.15);
 }
 
 .create-job-form input:focus,
 .create-job-form textarea:focus,
-.create-job-form select:focus{
-    outline:none;
-    border-color:#2563eb;
-    box-shadow:0 0 5px rgba(37,99,235,.3);
+.create-job-form select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-ring);
 }
 
-.create-btn{
-    width:100%;
-    margin-top:30px;
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:14px;
-    border-radius:8px;
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
+/* Submit */
+.create-btn {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 28px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.create-btn:hover{
-    background:#1d4ed8;
+.create-btn:hover {
+  background: var(--navy-900);
+  box-shadow: 0 4px 12px rgba(18, 59, 99, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .create-job-form {
+    padding: 22px 18px;
+  }
 }

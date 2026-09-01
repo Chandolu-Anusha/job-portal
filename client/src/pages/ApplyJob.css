@@ -1,117 +1,193 @@
-/*Apply Job Page*/
-.apply-page{
-    background:#f4f7fc;
-    min-height:100vh;
-    padding:40px;
+/* ============================================================
+   Apply Job page — form card with consistent field rhythm.
+   Scoped under .apply-form; stray <br/> spacing neutralized.
+   ============================================================ */
+
+.apply-page {
+  background: var(--bg-page);
+  min-height: 100vh;
 }
 
-/*Title*/
-.apply-title{
-    text-align:center;
-    font-size:38px;
-    color:#2563eb;
-    margin-bottom:30px;
+.apply-page .page-container {
+  max-width: 760px;
 }
 
-/*Form Card*/
-.apply-form{
-    max-width:700px;
-    margin:30px auto;
-    background:white;
-    padding:40px;
-    border-radius:15px;
-    box-shadow:0 8px 20px rgba(0,0,0,.1);
+.apply-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin-bottom: 6px;
 }
 
-/*Labels*/
-.apply-form label{
-    font-size:17px;
-    font-weight:bold;
-    color:#1e293b;
+.apply-subtitle {
+  font-size: 14.5px;
+  color: var(--text-soft);
+  margin-bottom: 24px;
 }
 
-/*Inputs*/
+/* Form card */
+.apply-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 30px 28px;
+}
+
+/* Neutralize <br/> gaps — spacing handled by margins */
+.apply-form br {
+  display: none;
+}
+
+/* Labels */
+.apply-form > label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 18px 0 7px;
+}
+
+.apply-form > label:first-child {
+  margin-top: 0;
+}
+
+/* Inputs */
 .apply-form input[type="text"],
 .apply-form input[type="email"],
 .apply-form input[type="file"],
 .apply-form select,
-.apply-form textarea{
-    width:100%;
-    padding:12px;
-    margin-top:8px;
-    margin-bottom:20px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    font-size:16px;
-    outline:none;
-    transition:.3s;
-    box-sizing:border-box;
+.apply-form textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 14.5px;
+  color: var(--text-strong);
+  background: var(--bg-card);
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.apply-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.apply-form input::placeholder,
+.apply-form textarea::placeholder {
+  color: #9ca3af;
 }
 
 .apply-form input:focus,
 .apply-form select:focus,
-.apply-form textarea:focus{
-    border-color:#2563eb;
-    box-shadow:0 0 8px rgba(37,99,235,.2);
+.apply-form textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-ring);
 }
 
-/*Radio Buttons*/
-.apply-form input[type="radio"]{
-    margin-right:8px;
-    margin-top:15px;
+.apply-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748b' d='M1.41 0 6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 36px;
 }
 
-.apply-form input[type="checkbox"]{
-    margin-right:10px;
+/* File input */
+.apply-form input[type="file"] {
+  padding: 9px 12px;
+  color: var(--text-soft);
+  cursor: pointer;
 }
 
-/*Textarea*/
-.apply-form textarea{
-    resize:vertical;
+.apply-form input[type="file"]::file-selector-button {
+  margin-right: 14px;
+  border: none;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
 }
 
-/*Submit Button*/
-.submit-btn{
-    width:30%;
-    padding:14px;
-    background:#2563eb;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
+.apply-form input[type="file"]::file-selector-button:hover {
+  background: rgba(37, 99, 235, 0.15);
 }
 
-.submit-btn:hover{
-    background:#1d4ed8;
+/* Radio group */
+.radio-group {
+  display: flex;
+  gap: 28px;
+  margin: 10px 0 6px;
 }
 
-.radio-group{
-    display:flex;
-    gap:30px;
-    margin:15px 0 20px;
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
 }
 
-.radio-group label{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-weight:normal;
-}
-.radio-group input[type="radio"]{
-    margin:0;
-      vertical-align:middle;
-  
+.apply-form input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
 }
 
-.checkbox-group{
-    margin:20px 0;
+/* Checkbox */
+.checkbox-group {
+  margin: 20px 0 4px;
 }
 
-.checkbox-group label{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.apply-form input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Submit */
+.submit-btn {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 24px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.submit-btn:hover {
+  background: var(--navy-900);
+  box-shadow: 0 4px 12px rgba(18, 59, 99, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .apply-form {
+    padding: 22px 18px;
+  }
 }

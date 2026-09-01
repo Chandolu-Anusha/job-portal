@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
+import CompanyLogo from "../components/CompanyLogo";
 import "./MyApplications.css";
 
 function MyApplications() {
@@ -35,23 +36,59 @@ function MyApplications() {
     }
 };
 
+const formatDate = (date) => {
+    if (!date) return "";
+    return new Date(date).toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+    });
+};
+
     return (
         <div className="my-applications-page">
-            <h2 className="my-applications-title">My Applications</h2>
+            <div className="page-container">
+                <h2 className="page-heading">My Applications</h2>
+                <p className="page-subheading">
+                    Track the status of all the jobs you have applied to.
+                </p>
 
-            {applications.map((application) => (
-                <div className="my-applications-card" key={application._id}>
-                    <h3 className="my-job-title">{application.job.title}</h3>
+                {applications.length === 0 ? (
+                    <div className="empty-state">You have not applied to any jobs yet.</div>
+                ) : (
+                    <div className="applications-grid">
+                        {applications.map((application) => (
+                            <div className="my-applications-card" key={application._id}>
+                                <div className="application-card-head">
+                                    <CompanyLogo
+                                        src={application.job?.companyLogo}
+                                        alt={application.job?.company}
+                                    />
+                                    <div>
+                                        <h3 className="my-job-title">{application.job.title}</h3>
+                                        <p className="my-company-name">{application.job.company}</p>
+                                    </div>
+                                </div>
 
-                    <p className="my-company-name">{application.job.company}</p>
+                                <div className="application-card-body">
+                                    <span className={`badge badge-${application.status}`}>
+                                        {application.status}
+                                    </span>
+                                    {application.createdAt && (
+                                        <span className="applied-date">
+                                            Applied on {formatDate(application.createdAt)}
+                                        </span>
+                                    )}
+                                </div>
 
-                    <p className="my-status">Status: {application.status}</p>
-
-                    <button className="my-cancel-btn" onClick={()=>handleWithdraw(application._id)}>
-                        Cancel
-                    </button>
-                </div>
-            ))}
+                                <button className="my-cancel-btn" onClick={()=>handleWithdraw(application._id)}>
+                                    Withdraw Application
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

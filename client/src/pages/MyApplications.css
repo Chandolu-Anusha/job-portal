@@ -1,55 +1,94 @@
-.my-applications-page{
-    background:#f4f7fc;
-    min-height:100vh;
-    padding:40px;
+/* ============================================================
+   My Applications — card grid with status badges
+   (badge colors come from the global .badge-* classes)
+   ============================================================ */
+
+.my-applications-page {
+  background: var(--bg-page);
+  min-height: 100vh;
 }
 
-.my-applications-title{
-    text-align:center;
-    color:#0e0e0e;
-    font-size:38px;
-    margin-bottom:35px;
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
 }
 
-.my-applications-card{
-    background:white;
-    border-radius:15px;
-    padding:25px;
-    border-left:5px solid #2563eb;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    margin-bottom:25px;
-    width:50%;
+.my-applications-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.my-applications-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 20px rgba(0,0,0,.15);
+.my-applications-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
 }
 
-.my-job-title{
-    color:#010612;
-    margin-bottom:10px;
+.application-card-head {
+  margin-bottom: 16px;
 }
 
-.my-company-name,
-.my-status{
-    color:#212020;
-    margin:8px 0;
-    font-size:17px;
+/* Slightly smaller logos on this page */
+.company-logo,
+.company-avatar {
+  width: 44px;
+  height: 44px;
 }
 
-.my-cancel-btn{
-    margin-top:20px;
-    background:#f02727;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    transition:.3s;
+.company-avatar {
+  font-size: 18px;
 }
 
-.my-cancel-btn:hover{
-    background:#dc2626;
+.my-job-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-strong);
+  line-height: 1.35;
+}
+
+.my-company-name {
+  font-size: 13.5px;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+.application-card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+
+.applied-date {
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.my-cancel-btn {
+  margin-top: auto;
+  min-height: 40px;
+  padding: 9px 18px;
+  background: var(--bg-card);
+  color: var(--danger-dark);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.my-cancel-btn:hover {
+  background: var(--danger);
+  color: #fff;
 }

@@ -21,31 +21,68 @@ function Profile() {
         }
     };
     console.log("Current state:",user);
+
+    const initials = (user?.name || "U")
+        .split(" ")
+        .map((part) => part.charAt(0).toUpperCase())
+        .slice(0, 2)
+        .join("");
+
     return (
         <div className="profile-page">
-            <h2 className="profilr-title">Profile</h2>
+            <div className="page-container">
+                <h2 className="profile-title">My Profile</h2>
+                <p className="profile-subtitle">
+                    Manage your personal information and account settings.
+                </p>
 
-            {user && (
-                <div className="profile-card">
-                    <p><strong>Name:</strong> {user.name}</p>
-                    <p><strong>Email:</strong>{user.email}</p>
-                    <p><strong>Role:</strong>{user.role}</p>
+                {user && (
+                    <div className="profile-card">
+                        <div className="profile-head">
+                            <div className="profile-avatar">{initials}</div>
+                            <div>
+                                <h3 className="profile-name">{user.name}</h3>
+                                <span className="badge badge-primary">{user.role}</span>
+                            </div>
+                        </div>
 
-                    <p><strong>Phone: </strong>{user.phone  ||  "Not added yet"}</p>
-                    <p><strong>Location: </strong>{user.location  || "Not added yet"}</p>
-                    <p><strong>Bio: </strong>{user.bio  || "Not added yet"}</p>
-                    <p><strong>Skills: </strong>{user.skills || "Not added yet"}</p>
+                        <div className="profile-details">
+                            <div className="detail-item">
+                                <span className="detail-label">Email</span>
+                                <span className="detail-value">{user.email}</span>
+                            </div>
+                            <div className="detail-item">
+                                <span className="detail-label">Phone</span>
+                                <span className="detail-value">{user.phone || "Not added yet"}</span>
+                            </div>
+                            <div className="detail-item">
+                                <span className="detail-label">Location</span>
+                                <span className="detail-value">{user.location || "Not added yet"}</span>
+                            </div>
+                            <div className="detail-item">
+                                <span className="detail-label">Skills</span>
+                                <span className="detail-value">{user.skills || "Not added yet"}</span>
+                            </div>
+                        </div>
 
-                   <div className="profile-action">
-                        <Link to="/edit-profile">
-                            <button className="profile-btn">Edit Profile</button>
-                        </Link>
-                        <Link to="/change-password">
-                        <button className="profile-btn">Change Password</button>
-                        </Link>
+                        {user.bio && (
+                            <div className="profile-bio">
+                                <span className="detail-label">Bio</span>
+                                <p>{user.bio}</p>
+                            </div>
+                        )}
+
+                       <div className="profile-action">
+                            <Link to="/edit-profile">
+                                <button className="profile-btn primary">Edit Profile</button>
+                            </Link>
+                            <Link to="/change-password">
+                            <button className="profile-btn outline">Change Password</button>
+                            </Link>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }

@@ -48,6 +48,38 @@ function ApplyJob() {
             return;
         }
 
+        // Validate before submitting — show a clear message instead of a
+        // server error when any required field is missed.
+        const requiredFields = [
+            "firstName",
+            "lastName",
+            "email",
+            "degree",
+            "educationStatus",
+            "phone",
+            "coverLetter"
+        ];
+
+        const missingFields = requiredFields.filter(
+            (field) => !String(formData[field] || "").trim()
+        );
+
+        if (missingFields.length > 0 || !formData.resume) {
+            toast.error("Please fill all the required fields before submitting.");
+            return;
+        }
+
+        if (formData.educationStatus === "Pursuing" && !formData.graduationYear) {
+            toast.error("Please select your expected graduation year.");
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email.trim())) {
+            toast.error("Please enter a valid email address.");
+            return;
+        }
+
 
         try {
 
@@ -86,7 +118,12 @@ function ApplyJob() {
 
     return (
         <div className="apply-page">
+            <div className="page-container">
             <h2 className="apply-title">Job Application Form</h2>
+
+            <p className="apply-subtitle">
+                Fill in your details below to apply for this position.
+            </p>
 
             <form className="apply-form" onSubmit={handleSubmit}>
 
@@ -218,7 +255,7 @@ function ApplyJob() {
                     cols="40"
                     value={formData.coverLetter}
                     onChange={handleChange}
-                    
+                    required
                 />
 
                 <br /><br />
@@ -241,6 +278,7 @@ function ApplyJob() {
                 </button>
 
             </form>
+            </div>
         </div>
     );
 }

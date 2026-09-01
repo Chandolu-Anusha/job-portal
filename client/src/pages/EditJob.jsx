@@ -74,8 +74,13 @@ const handleChange=(e)=>{
     };
 return (
     <div className="edit-job-page">
+        <div className="page-container">
 
         <h2 className="edit-job-title">Edit Job</h2>
+
+        <p className="edit-job-subtitle">
+            Update the details of this posting and save your changes.
+        </p>
 
         <form className="edit-job-form" onSubmit={handleSubmit}>
 
@@ -165,6 +170,7 @@ return (
             </button>
 
         </form>
+        </div>
 
     </div>
 );

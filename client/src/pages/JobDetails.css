@@ -1,73 +1,186 @@
-.job-details{
-    max-width:800px;
-    margin:40px auto;
-    background:white;
-    padding:35px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+/* ============================================================
+   Job Details page — scoped under .job-details so .job-title
+   no longer collides with ManageJobs
+   ============================================================ */
+
+.job-details {
+  background: var(--bg-page);
+  min-height: 100vh;
 }
 
-.job-title{
-    text-align:center;
-    color:#2563eb;
-    font-size:36px;
-    margin-bottom:30px;
+.job-details .page-container {
+  max-width: 860px;
 }
 
-.job-info p{
-    font-size:18px;
-    margin:15px 0;
-    line-height:1.6;
-    color:#444;
+/* Header */
+.job-details-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
 }
 
-.job-info strong{
-    color:#111827;
+.company-logo,
+.company-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
 }
 
-.apply-btn{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 35px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:17px;
-    transition:.3s;
+/* Uploaded logo sits on pure white so transparent PNGs look clean
+   and the image never stretches or distorts */
+.company-logo {
+  object-fit: contain;
+  background: #ffffff;
+  padding: 5px;
 }
 
-.apply-btn:hover{
-    background:#1d4ed8;
+.company-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: transparent;
 }
 
-.disabled-btn{
-    display:block;
-    margin:35px auto 0;
-    background:#9ca3af;
-    color:white;
-    border:none;
-    padding:12px 35px;
-    border-radius:8px;
-    cursor:not-allowed;
-}
-.job-btn{
-    display:flex;
-    justify-content:center;
-    align-items: center;
-    gap:40px;
-    margin-top:30px;
-}
-.save-btn{
-    background:#10b981;
-    color:white;
-    border:none;
-    padding:12px 25px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    transition:.3s;
+.job-details-heading .job-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-strong);
+  text-align: left;
+  line-height: 1.3;
 }
 
-.save-btn:hover{
-    background:#059669;
+.job-details-heading .job-company {
+  font-size: 14.5px;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+/* Meta chips */
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.meta-chip {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate-700);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+/* Info sections */
+.job-info {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.info-block h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.info-block p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  white-space: pre-line;
+}
+
+.posted-date {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+/* Actions */
+.job-btn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.apply-btn {
+  min-height: 46px;
+  padding: 12px 32px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.apply-btn:hover {
+  background: var(--navy-900);
+  box-shadow: 0 4px 12px rgba(18, 59, 99, 0.3);
+}
+
+.save-btn {
+  min-height: 46px;
+  padding: 12px 26px;
+  background: var(--bg-card);
+  color: var(--success-dark);
+  border: 1px solid var(--success);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.save-btn:hover {
+  background: var(--success);
+  color: #fff;
+}
+
+.disabled-btn {
+  display: block;
+  margin-top: 26px;
+  min-height: 46px;
+  padding: 12px 32px;
+  background: var(--bg-subtle);
+  color: var(--slate-500);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: not-allowed;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Note shown to recruiters instead of the Apply button */
+.recruiter-note {
+  display: inline-block;
+  margin-top: 26px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-soft);
+  background: var(--bg-subtle);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
 }

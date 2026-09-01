@@ -3,12 +3,15 @@ import Navbar from "./components/Navbar";
 import Home from"./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import Profile from "./pages/Profile";
 import Jobs from "./pages/Jobs";
 import JobDetails from"./pages/JobDetails";
 import MyApplications from "./pages/MyApplications";
 import ManageJobs from"./pages/ManageJobs";
 import JobApplications from "./pages/JobApplications";
+import AllApplications from "./pages/AllApplications";
 import CreateJob from "./pages/CreateJob";
 import EditJob from "./pages/EditJob";
 import SavedJobs from"./pages/SavedJobs";
@@ -18,6 +21,7 @@ import Logout from"./pages/Logout";
 import RoleProtectedRoute  from "./components/RoleProtectedRoute";
 import EditProfile from "./pages/EditProfile";
 import ApplyJob from "./pages/ApplyJob";
+import GuestJobs from "./pages/GuestJobs";
 
 
 function App(){
@@ -28,7 +32,16 @@ function App(){
         <Route path="/"  element={<Home/>}/>
         <Route path="/login"  element={<Login/>}/>
         <Route path="/register"  element={<Register/>}/>
-        <Route path="/jobs" element={<Jobs/>}/>
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
+        <Route path="/reset-password/:token" element={<ResetPassword/>}/>
+        <Route
+              path="/jobs"
+              element={
+                  localStorage.getItem("token")
+                      ? <Jobs />
+                      : <GuestJobs />
+                    }
+        />
         <Route path="/jobs/:id" element={<JobDetails/>}/>
         <Route path="/my" element={
           <RoleProtectedRoute role="student">
@@ -45,6 +58,11 @@ function App(){
              <ManageJobs/>
           </RoleProtectedRoute>
           }/>
+        <Route path="/applications" element={
+          <RoleProtectedRoute role="recruiter">
+             <AllApplications/>
+          </RoleProtectedRoute>
+         }/>
         <Route path="/applications/:id" element={
           <RoleProtectedRoute role="recruiter">
              <JobApplications/>

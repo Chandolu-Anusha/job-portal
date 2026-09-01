@@ -1,34 +1,34 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import api from "../services/api";
+import api, { API_ORIGIN } from "../services/api";
 import { toast } from "react-toastify";
 import "./JobApplications.css";
 
-function JobApplications() {
-    const { id } = useParams();
+function AllApplications() {
     const [keyword,setKeyword] = useState("");
     const [status,setStatus] = useState("");
-    const [job, setJob] = useState(null);
+    const [count, setCount] = useState(0);
+    const [loading, setLoading] = useState(true);
     const [applications, setApplications] = useState([]);
 
     useEffect(() => {
-        if (id) {
-            fetchApplications();
-        }
-    }, [keyword,status,id]);
+        fetchApplications();
+    }, [keyword,status]);
 
     const fetchApplications = async () => {
+        setLoading(true);
         try {
             const response = await api.get(
-                `/applications/job/${id}?keyword=${keyword}&status=${status}`
+                `/applications/recruiter/all?keyword=${keyword}&status=${status}`
             );
-            setJob(response.data.job);
             setApplications(response.data.applications);
+            setCount(response.data.count);
         } catch (error) {
             toast.error(
                 error.response?.data?.message || "Failed to load applications."
             );
             setApplications([]);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -57,34 +57,16 @@ function JobApplications() {
         });
     };
 
-    if (!id) {
-        return (
-            <div className="applications-page">
-                <div className="page-container">
-                    <h2 className="applications-title">Job Applications</h2>
-                    <p className="applications-subtitle">
-                        Please select a job to view its applications.
-                    </p>
-                </div>
-            </div>
-        );
-    }
-
     return (
     <div className="applications-page">
         <div className="page-container">
 
-        <h2 className="applications-title">Job Applications</h2>
-
-        {job && (
-            <div className="applications-job-header">
-                <h3 className="applications-job-title">{job.title}</h3>
-                <div className="applications-job-meta">
-                    {job.company && <span>Company: {job.company}</span>}
-                    {job.location && <span>Location: {job.location}</span>}
-                </div>
-            </div>
-        )}
+        <h2 className="applications-title">All Applications</h2>
+        <p className="applications-subtitle">
+            {loading
+                ? "Loading applications..."
+                : `${count} ${count === 1 ? "application" : "applications"} received across all your jobs.`}
+        </p>
 
         <div className="filter-box">
 
@@ -107,12 +89,24 @@ function JobApplications() {
 
         </div>
 
-        {applications.length === 0 && (
-            <div className="empty-state">No applications received for this job yet.</div>
+        {!loading && applications.length === 0 && (
+            <div className="empty-state">
+                No applications received yet.
+            </div>
         )}
 
         {applications.map((application) => (
             <div className="application-card" key={application._id}>
+
+                <div className="applicant-job-row">
+                    <span className="job-chip">{application.job?.title}</span>
+                    {application.job?.company && (
+                        <span className="job-company">{application.job.company}</span>
+                    )}
+                    <span className="applicant-date">
+                        Applied on {formatDate(application.createdAt)}
+                    </span>
+                </div>
 
                 <div className="applicant-head">
                     <div className="applicant-avatar">
@@ -166,7 +160,7 @@ function JobApplications() {
 
                     {application.student?.resume || application.resume ? (
                         <a
-                            href={`http://localhost:5000/${((application.student && application.student.resume) || application.resume || "").replace(/\\/g, "/")}`}
+                            href={`${API_ORIGIN}/${((application.student && application.student.resume) || application.resume || "").replace(/\\/g, "/")}`}
                             target="_blank"
                             rel="noreferrer"
                         >
@@ -206,4 +200,4 @@ function JobApplications() {
 );
 }
 
-export default JobApplications;
+export default AllApplications;

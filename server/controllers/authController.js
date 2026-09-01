@@ -4,72 +4,92 @@ const jwt=require("jsonwebtoken");
 const crypto = require("crypto");
 const transporter = require("../config/mail");
 const register=async(req,res)=>{
-    console.log(req.body);
-    const{name,password,email,role}=req.body;
-    if(!name || !email ||!password){
-        return res.status(400).json({
-            message: "Please fill all required fields"
+    try{
+        const{name,password,email,role}=req.body;
+        if(!name || !email ||!password){
+            return res.status(400).json({
+                success:false,
+                message: "Please fill in all required fields."
+            });
+        }
+        const existingUser=await User.findOne({email});
+        if(existingUser){
+            return res.status(400).json({
+                success:false,
+                message: "An account with this email already exists. Please log in instead."
+            });
+        }
+        const  hashedPassword=await bcrypt.hash(password,10);
+        const newUser=await User.create({
+            name,
+            email,
+            password:hashedPassword,
+            role
+        });
+       res.status(201).json({
+        success:true,
+        message:"Registration successful. Please log in.",
+        user:newUser
+       });
+    }catch(error){
+        console.error("Register error:", error.message);
+        res.status(500).json({
+            success:false,
+            message:"Something went wrong. Please try again."
         });
     }
-    const existingUser=await User.findOne({email});
-    if(existingUser){
-        return res.status(400).json({
-            message: "User already exists"
-        });
-    }
-    const  hashedPassword=await bcrypt.hash(password,10);
-    const newUser=await User.create({
-        name,
-        email,
-        password:hashedPassword,
-        role
-    });
-   res.status(201).json({
-    success:true,
-    message:"User Registered Succussfully",
-    user:newUser
-   });
 };
 const login=async(req,res)=>{
-    const{email,password}=req.body;
-    if(!email || !password){
-        return res.status(400).json({
-            message:"Email and password are required"
+    try{
+        const{email,password}=req.body;
+        if(!email || !password){
+            return res.status(400).json({
+                success:false,
+                message:"Please enter your email and password."
+            });
+        }
+      const existingUser=await User.findOne({email});
+      if(!existingUser){
+        return res.status(401).json({
+            success:false,
+            message:"Invalid email or password."
+        });
+      }
+    const isMatch=await bcrypt.compare(password,existingUser.password);
+    if(!isMatch){
+        return res.status(401).json({
+            success:false,
+            message:"Invalid email or password."
         });
     }
-  const existingUser=await User.findOne({email});
-  if(!existingUser){
-    return res.status(400).json({
-        message:"User not found"
+    const token=jwt.sign(
+        {
+            id:existingUser._id,
+            role:existingUser.role
+        },
+        process.env.JWT_SECRET,
+        {
+            expiresIn:"7d"
+        }
+    );
+    res.status(200).json({
+        success:true,
+        message:"Login successful",
+        token,
+        user:{
+            id:existingUser._id,
+            name:existingUser.name,
+            email:existingUser.email,
+            role:existingUser.role
+        }
     });
-  }
-const isMatch=await bcrypt.compare(password,existingUser.password);
-if(!isMatch){
-    return res.status(401).json({
-        message:"Invalid Password"
-    });
-}
-const token=jwt.sign(
-    {
-        id:existingUser._id,
-        role:existingUser.role
-    },
-    process.env.JWT_SECRET,
-    {
-        expiresIn:"7d"
+    }catch(error){
+        console.error("Login error:", error.message);
+        res.status(500).json({
+            success:false,
+            message:"Something went wrong. Please try again."
+        });
     }
-);
-res.status(200).json({
-    success:true,
-    message:"Login Successful",
-    token,
-    user:{
-        id:existingUser._id,
-        name:existingUser.name,
-        email:existingUser.email,
-        role:existingUser.role
-    }
-});
 };
 const getProfile=async(req,res)=>
 {
@@ -80,9 +100,10 @@ const getProfile=async(req,res)=>
             user
         });
     }catch(error){
+        console.error("Profile error:", error.message);
         res.status(500).json({
             success:false,
-            message:"Server Error"
+            message:"Something went wrong. Please try again."
         });
     }
 };
@@ -92,7 +113,7 @@ const uploadResume = async (req, res) => {
         if (!req.file) {
             return res.status(400).json({
                 success: false,
-                message: "Please upload a resume"
+                message: "Please upload a resume."
             });
         }
 
@@ -116,9 +137,10 @@ const uploadResume = async (req, res) => {
         });
 
     } catch (error) {
+        console.error("Resume upload error:", error.message);
         res.status(500).json({
             success: false,
-            message: error.message
+            message: "Something went wrong. Please try again."
         });
     }
 };
@@ -148,12 +170,11 @@ const updateProfile=async(req,res)=>{
         });
 
     } catch (error) {
-
+        console.error("Profile update error:", error.message);
         res.status(500).json({
             success: false,
-            message: error.message
+            message: "Something went wrong. Please try again."
         });
-
     }
 };
 
@@ -161,6 +182,13 @@ const changePassword = async (req, res) => {
     try {
 
         const { oldPassword, newPassword } = req.body;
+
+        if (!oldPassword || !newPassword) {
+            return res.status(400).json({
+                success: false,
+                message: "Please enter your current and new password."
+            });
+        }
 
         const user = await User.findById(req.user.id);
 
@@ -175,7 +203,14 @@ const changePassword = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({
                 success: false,
-                message: "Old password is incorrect"
+                message: "Your current password is incorrect."
+            });
+        }
+
+        if (newPassword.length < 6) {
+            return res.status(400).json({
+                success: false,
+                message: "New password must be at least 6 characters long."
             });
         }
 
@@ -191,12 +226,11 @@ const changePassword = async (req, res) => {
         });
 
     } catch (error) {
-
+        console.error("Change password error:", error.message);
         res.status(500).json({
             success: false,
-            message: error.message
+            message: "Something went wrong. Please try again."
         });
-
     }
 };
 const forgotPassword = async (req, res) => {
@@ -207,7 +241,7 @@ const forgotPassword = async (req, res) => {
         if (!email) {
             return res.status(400).json({
                 success: false,
-                message: "Email is required"
+                message: "Please enter your email address."
             });
         }
 
@@ -216,7 +250,7 @@ const forgotPassword = async (req, res) => {
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: "User not found"
+                message: "No account found with this email address."
             });
         }
 
@@ -238,13 +272,14 @@ const forgotPassword = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Password reset email sent"
+            message: "Password reset email sent. Please check your inbox."
         });
 
     } catch (error) {
+        console.error("Forgot password error:", error.message);
         return res.status(500).json({
             success: false,
-            message: error.message
+            message: "Unable to send reset email right now. Please try again later."
         });
     }
 };
@@ -258,7 +293,7 @@ const resetPassword = async (req, res) => {
         if (!newPassword) {
             return res.status(400).json({
                 success: false,
-                message: "New password is required"
+                message: "Please enter a new password."
             });
         }
 
@@ -270,7 +305,7 @@ const resetPassword = async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid or expired token"
+                message: "This reset link is invalid or has expired."
             });
         }
 
@@ -285,16 +320,15 @@ const resetPassword = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Password reset successfully"
+            message: "Password reset successfully. You can now log in."
         });
 
     } catch (error) {
-
+        console.error("Reset password error:", error.message);
         return res.status(500).json({
             success: false,
-            message: error.message
+            message: "Something went wrong. Please try again."
         });
-
     }
 };
 

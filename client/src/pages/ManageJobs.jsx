@@ -45,59 +45,92 @@ function ManageJobs(){
             console.log(error.response?.data);
         }
      };
+
+     const formatDate = (date) => {
+         if (!date) return "";
+         return new Date(date).toLocaleDateString("en-IN", {
+             day: "numeric",
+             month: "short",
+             year: "numeric",
+         });
+     };
 return (
     <div className="manage-page">
+        <div className="page-container">
         <h2 className="manage-title">Manage Jobs</h2>
+        <p className="manage-subtitle">
+            Review your postings, view applicants, and keep job statuses up to date.
+        </p>
+
+        {jobs.length === 0 && (
+            <div className="empty-state">You have not posted any jobs yet.</div>
+        )}
 
         {jobs.map((job) => (
             <div className="manage-card" key={job._id}>
 
-                <Link
-                    to={`/applications/${job._id}`}
-                    className="job-link"
-                >
-                    <h3 className="job-title">{job.title}</h3>
-                </Link>
+                <div className="manage-head">
+                    <Link to={`/applications/${job._id}`} className="job-link">
+                        <h3 className="job-title">{job.title}</h3>
+                    </Link>
+                    <span className={`badge badge-${job.status === "Open" ? "open" : "closed"}`}>
+                        {job.status}
+                    </span>
+                </div>
 
-                <p><strong>Company:</strong> {job.company}</p>
-                <p><strong>Location:</strong> {job.location}</p>
-                <p><strong>Status:</strong> {job.status}</p>
+                <p className="manage-company">{job.company}</p>
 
-                <div className="manage-buttons">
+                <div className="manage-meta">
+                    {job.location && <span className="meta-chip">{job.location}</span>}
+                    {job.createdAt && (
+                        <span className="meta-chip">Posted {formatDate(job.createdAt)}</span>
+                    )}
+                </div>
 
-                    <Link to={`/edit-job/${job._id}`}>
-                        <button className="edit-btn">
-                            Edit
-                        </button>
+                <div className="manage-footer">
+
+                    <Link to={`/applications/${job._id}`} className="applicants-link">
+                        View Applications →
                     </Link>
 
-                    <button
-                        className="delete-btn"
-                        onClick={() => deleteJob(job._id)}
-                    >
-                        Delete
-                    </button>
+                    <div className="manage-buttons">
 
-                    {job.status === "Open" ? (
+                        <Link to={`/edit-job/${job._id}`}>
+                            <button className="edit-btn">
+                                Edit
+                            </button>
+                        </Link>
+
                         <button
-                            className="close-btn"
-                            onClick={() => updateStatus(job._id, "Closed")}
+                            className="delete-btn"
+                            onClick={() => deleteJob(job._id)}
                         >
-                            Close Job
+                            Delete
                         </button>
-                    ) : (
-                        <button
-                            className="open-btn"
-                            onClick={() => updateStatus(job._id, "Open")}
-                        >
-                            Open Job
-                        </button>
-                    )}
+
+                        {job.status === "Open" ? (
+                            <button
+                                className="close-btn"
+                                onClick={() => updateStatus(job._id, "Closed")}
+                            >
+                                Close Job
+                            </button>
+                        ) : (
+                            <button
+                                className="open-btn"
+                                onClick={() => updateStatus(job._id, "Open")}
+                            >
+                                Open Job
+                            </button>
+                        )}
+
+                    </div>
 
                 </div>
 
             </div>
         ))}
+        </div>
     </div>
 );
 }

@@ -52,8 +52,13 @@ function EditProfile() {
     };
 return (
     <div className="edit-profile-page">
+        <div className="page-container">
 
         <h2 className="edit-profile-title">Edit Profile</h2>
+
+        <p className="edit-profile-subtitle">
+            Keep your information up to date so recruiters can find you.
+        </p>
 
         <form className="edit-profile-form" onSubmit={handleSubmit}>
 
@@ -127,6 +132,7 @@ return (
             </button>
 
         </form>
+        </div>
 
     </div>
 );

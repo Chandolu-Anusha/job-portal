@@ -1,110 +1,113 @@
-.saved-page{
-    background:#f4f7fc;
-    min-height:100vh;
-    padding:40px;
+/* ============================================================
+   Saved Jobs — card grid (scoped under .saved-page so the
+   Dashboard's .saved-card stat is no longer affected)
+   ============================================================ */
+
+.saved-page {
+  background: var(--bg-page);
+  min-height: 100vh;
 }
 
-.saved-title{
-    text-align:center;
-    color:#0e0e0e;
-    font-size:38px;
-    margin-bottom:35px;
+.saved-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
 }
 
-.saved-card{
-    background:white;
-    border-radius: 15px;
-    padding: 25px;
-    border-left: 5px solid #2563eb;
-    box-shadow: 0 5px 15px rgba(0,0,0,.1);
-    margin-bottom: 25px;
-    width: 50%;
+.saved-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.saved-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 20px rgba(0,0,0,.15);
+.saved-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
 }
 
-.saved-job-title{
-    color:#010612;
-    margin-bottom:10px;
+.saved-card-head {
+  margin-bottom: 15px;
 }
 
-.saved-company,
-.saved-location{
-    color:#212020;
-    margin:8px 0;
-    font-size:17px;
+/* Slightly smaller avatars on this page */
+.company-logo,
+.company-avatar {
+  width: 44px;
+  height: 44px;
 }
 
-.saved-actions{
-    margin-top:20px;
-    display:flex;
-    gap:15px;
+.company-avatar {
+  font-size: 18px;
 }
 
-.view-btn{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    transition:.3s;
+.saved-job-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-strong);
+  line-height: 1.35;
 }
 
-.view-btn:hover{
-    background:#1d4ed8;
+.saved-company {
+  font-size: 13.5px;
+  color: var(--text-soft);
+  margin-top: 2px;
 }
 
-
-.saved-view-btn{
-    display:inline-block;
-    margin-top:20px;
-    background:#2563eb;
-    color:white;
-    text-decoration:none;
-    padding:10px 20px;
-    border-radius:8px;
-    transition:.3s;
+.job-meta {
+  margin-bottom: 16px;
 }
 
-.saved-view-btn:hover{
-    background:#1d4ed8;
+.saved-actions {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.saved-actions{
-    display:flex;
-    gap:15px;
-    margin-top:20px;
+.saved-view-btn,
+.saved-remove-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.18s ease, color 0.18s ease;
+  box-sizing: border-box;
 }
 
-.saved-view-btn{
-    text-decoration:none;
-    background:#2563eb;
-    color:white;
-    padding:10px 20px;
-    border-radius:8px;
-    transition:.3s;
+/* View Button */
+.saved-view-btn {
+  background: var(--navy);
+  color: #fff;
 }
 
-.saved-view-btn:hover{
-    background:#1d4ed8;
-}
-/*remove button*/
-
-.saved-remove-btn{
-    background:#f02727;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    transition:.3s;
+.saved-view-btn:hover {
+  background: var(--navy-900);
+  color: #fff;
 }
 
-.saved-remove-btn:hover{
-    background:#dc2626;
+/* Remove Button */
+.saved-remove-btn {
+  background: var(--bg-card);
+  color: var(--danger-dark);
+  border: 1px solid var(--danger);
+  cursor: pointer;
+}
+
+.saved-remove-btn:hover {
+  background: var(--danger);
+  color: #fff;
 }

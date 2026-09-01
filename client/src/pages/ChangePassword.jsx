@@ -25,15 +25,23 @@ function ChangePassword(){
                 newPassword:""
             });
         }catch(error){
-            toast.error(error.response?.data);
+            toast.error(
+                error.response?.data?.message ||
+                    "Something went wrong. Please try again."
+            );
         }
     };
     return (
     <div className="change-password-page">
+        <div className="page-container">
 
         <h2 className="change-password-title">
             Change Password
         </h2>
+
+        <p className="change-password-subtitle">
+            Choose a strong password to keep your account secure.
+        </p>
 
         <form className="change-password-form" onSubmit={handleSubmit}>
 
@@ -41,9 +49,9 @@ function ChangePassword(){
                 <label>Current Password</label>
                 <input
                     type="password"
-                    name="currentPassword"
+                    name="oldPassword"
                     placeholder="Enter Current Password"
-                    value={password.currentPassword}
+                    value={password.oldPassword}
                     onChange={handleChange}
                     required
                 />
@@ -69,6 +77,7 @@ function ChangePassword(){
             </button>
 
         </form>
+        </div>
 
     </div>
 );

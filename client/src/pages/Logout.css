@@ -1,27 +1,36 @@
-.logout-page{
-    background:#f4f7fc;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+/* ============================================================
+   Logout / Login-success interstitial screen
+   ============================================================ */
+
+.logout-page {
+  flex: 1;
+  min-height: calc(100vh - 72px);
+  background: var(--bg-page);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
 }
 
-.logout-card{
-    width:400px;
-    background:#fff;
-    padding:40px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+.logout-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 40px 32px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
 }
 
-.logout-card h2{
-    color:#2563eb;
-    font-size:30px;
-    margin-bottom:15px;
+.logout-card h2 {
+  color: var(--slate-900);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
-.logout-card p{
-    color:#6b7280;
-    font-size:16px;
+.logout-card p {
+  color: var(--text-soft);
+  font-size: 14.5px;
 }

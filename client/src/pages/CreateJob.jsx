@@ -48,7 +48,12 @@ function CreateJob() {
 
     return (
         <div className="create-job-page">
-            <h2 className="create-job-title">Create Job</h2>
+            <div className="page-container">
+            <h2 className="create-job-title">Create a New Job</h2>
+
+            <p className="create-job-subtitle">
+                Provide the role details below. Your posting will be visible to students immediately.
+            </p>
 
             <form className="create-job-form" onSubmit={handleSubmit}>
                 <label>Job Title</label>
@@ -148,6 +153,7 @@ function CreateJob() {
                 </button>
 
             </form>
+            </div>
         </div>
     );
 }

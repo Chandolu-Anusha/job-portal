@@ -1,0 +1,49 @@
+/* ============================================================
+   History controls — in-app back / forward / refresh buttons
+   (browser-style) shown on the left of the navbar.
+   ============================================================ */
+
+.history-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: 14px;
+  padding-right: 14px;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.history-btn {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.history-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+
+.history-btn:disabled {
+  color: #94a3b8;
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.history-btn svg {
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .history-controls {
+    margin-right: 10px;
+    padding-right: 10px;
+  }
+}

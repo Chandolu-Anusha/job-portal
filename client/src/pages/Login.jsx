@@ -1,7 +1,8 @@
 import {useState}from "react";
 import api from "../services/api";
-import {useNavigate}from "react-router-dom";
 import { toast } from "react-toastify";
+import {useNavigate}from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 function Login(){
@@ -14,9 +15,17 @@ function Login(){
 const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Trim before validating empty required fields.
+    const emailTrimmed = email.trim();
+
+    if (!emailTrimmed || !password.trim()) {
+        toast.error("Please enter your email and password.");
+        return;
+    }
+
     try {
         const response = await api.post("/auth/login", {
-            email,
+            email: emailTrimmed,
             password,
         });
 
@@ -31,7 +40,13 @@ const handleSubmit = async (e) => {
         }, 1000);
 
     } catch (error) {
-        console.error(error.response?.data?.message || "Login failed.");
+        if (error.response) {
+            toast.error(
+                error.response.data?.message || "Invalid email or password."
+            );
+        } else {
+            toast.error("Unable to connect to the server. Please try again.");
+        }
     }
 };
 
@@ -50,7 +65,9 @@ if (loginSuccess) {
 
         <div className="auth-card">
 
-            <h2 className="auth-title">Login</h2>
+            <h2 className="auth-title">Welcome back</h2>
+
+            <p className="auth-subtitle">Login to your account to continue</p>
 
             <form onSubmit={handleSubmit}>
 
@@ -74,11 +91,21 @@ if (loginSuccess) {
                     />
                 </div>
 
+                <div className="forgot-row">
+                    <Link to="/forgot-password" className="forgot-link">
+                        Forgot Password?
+                    </Link>
+                </div>
+
                 <button className="auth-btn" type="submit">
                     Login
                 </button>
 
             </form>
+
+            <p className="auth-footer">
+                Don't have an account? <Link to="/register">Register</Link>
+            </p>
 
         </div>
 
