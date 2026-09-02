@@ -39,6 +39,17 @@ function CreateJob() {
             data.append("jobType", job.jobType);
             data.append("experience", job.experience);
 
+            console.log("Job data:", {
+                title: job.title,
+                company: job.company,
+                location: job.location,
+                salary: job.salary,
+                description: job.description,
+                requirements: job.requirements,
+                jobType: job.jobType,
+                experience: job.experience
+            });
+
             const response = await api.post("/jobs", data);
             toast.success(response.data.message);
         } catch (error) {
